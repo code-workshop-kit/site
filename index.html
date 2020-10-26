@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <nav class="top-nav">
+      <div class="top-nav-items">
+        <a href="#" class="logo">cwk</a>
+        <a href="/guides">GUIDES</a>
+        <a
+          target="_blank"
+          href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+          >DOCS</a
+        >
+        <a href="https://github.com/code-workshop-kit/code-workshop-kit"></a>
+      </div>
+    </nav>
+    <main>
+      <section id="cta-section">
+        <h1>code-workshop-kit</h1>
+        <h2>The future of remote code workshops & trainings</h2>
+        <div class="cta-buttons">
+          <button id="copy-npm-btn">
+            npm i -g code-workshop-kit<svg
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="currentColor"
+                d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
+              ></path>
+            </svg>
+          </button>
+          <a
+            target="_blank"
+            href="https://github.com/code-workshop-kit/code-workshop-kit"
+            ><button id="docs-btn">DOCS</button></a
+          >
+        </div>
+        <div class="ref-buttons">
+          Leveraging
+          <a
+            target="_blank"
+            href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare"
+            ><button class="ref-button">VS Code Live Share</button></a
+          >
+          <a
+            target="_blank"
+            href="https://modern-web.dev/docs/dev-server/overview/"
+            ><button class="ref-button">@web/dev-server</button></a
+          >
+        </div>
+      </section>
+      <section id="connect-section">
+        <div class="video-wrapper"></div>
+        <div class="text-wrapper">
+          <h3>Connect your participants</h3>
+          <p>Leverage Visual Studio Code's Live Share Extension</p>
+          <p>Use CWK to scaffold some start files</p>
+        </div>
+      </section>
+      <section id="frontend-section">
+        <div class="text-wrapper">
+          <h3>Serve for frontend</h3>
+          <p>Use the dev server for serving HTTP</p>
+          <p>Includes HMR support, perfect for frontend workshops</p>
+        </div>
+        <div class="video-wrapper"></div>
+      </section>
+      <section id="backend-section">
+        <div class="video-wrapper"></div>
+        <div class="text-wrapper">
+          <h3>Portal for backend</h3>
+          <p>Use the portal to connect terminal input/output</p>
+          <p>The standard for backend workshops</p>
+        </div>
+      </section>
+      <section id="signup-section">
+        <h3>Sign up for more</h3>
+        <p>
+          code-workshop-kit is v1, but a lot more work will be done for small
+          fixes and adding more in-depth guides on giving interactive code
+          workshops.
+        </p>
+        <p>
+          Sign up with your email address and I will keep you posted about major
+          updates and changes.
+        </p>
+        <button>Subscribe</button>
+      </section>
+      <section id="selling-points-section">
+        <div>
+          <h4>What is it?</h4>
+          <p>
+            <a
+              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+              >code-workshop-kit</a
+            >
+            is a combination of tools to enhance collaboration, specifically in
+            a workshop, tutorial or training environment
+          </p>
+        </div>
+        <div>
+          <h4>Why now?</h4>
+          <p>
+            Remote workshops have been upcoming for multiple years, but now with
+            COVID-19 dominating our lives, this seemed like the right time.
+          </p>
+          <p>
+            As a trainer myself, I had a need for this: to recreate the
+            interactive environment of a real life workshop or training.
+          </p>
+        </div>
+        <div>
+          <h4>Shared input</h4>
+          <p>
+            The tool is meant to be used on top of
+            <a
+              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+              >Visual Studio's Live Share extension</a
+            >
+            , which enables hosts & participants to see each other's code,
+            similar to how Google Docs works.
+          </p>
+        </div>
+        <div>
+          <h4>Shared output</h4>
+          <p>
+            The toolkit makes use of an extension of
+            <code>@web/dev-server</code>, as well as Live Share's "shared
+            servers" feature, which allows hosts & participants to see the
+            output of each other's code. Either backendn through a terminal
+            portal, or frontend.
+          </p>
+        </div>
+        <div>
+          <h4>Support for frontend & backend</h4>
+          <p>
+            <a
+              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+              >code-workshop-kit</a
+            >
+            is a combination of tools to enhance collaboration, specifically in
+            a workshop, tutorial or training environment
+          </p>
+        </div>
+        <div>
+          <h4>How can I find out more?</h4>
+          <p>
+            All of the documentation can be found on the
+            <a
+              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+              >Github repository of code-workshop-kit</a
+            >.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>
