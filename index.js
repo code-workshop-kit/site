@@ -1,3 +1,1 @@
-import { loadAndSetDankMono } from "./loadAndSetDankMonoFont.js";
-
-loadAndSetDankMono();
+import "./loadDankMonoFont.js";
