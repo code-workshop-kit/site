@@ -29,6 +29,7 @@ body {
   align-items: center;
   max-width: var(--cwk-content-width);
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .top-nav-items > a {
@@ -44,9 +45,17 @@ body {
 }
 
 .top-nav-items > .logo {
-  padding-left: 20px;
   font-size: 24px;
   flex-grow: 1;
+}
+
+.top-nav-items > .github-nav-logo {
+  color: var(--cwk-light);
+  width: 25px;
+}
+
+.github-nav-logo svg {
+  vertical-align: middle;
 }
 
 main {
@@ -60,6 +69,7 @@ h1 {
   font-weight: bold;
   font-size: 50px;
   margin-bottom: 6px;
+  margin-top: 75px;
 }
 
 h2 {
@@ -78,10 +88,15 @@ button:hover {
   transition: all 0.15s ease;
 }
 
+section {
+  margin-bottom: 250px;
+}
+
 #cta-section {
   text-align: center;
   max-width: max-content;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-buttons {
@@ -143,11 +158,61 @@ button:hover {
 #frontend-section,
 #backend-section {
   display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
   justify-content: space-between;
+  text-align: center;
+}
+
+#frontend-section {
+  flex-direction: column;
 }
 
 .video-wrapper {
-  width: 400px;
-  height: 200px;
-  background-color: skyblue;
+  position: relative;
+  max-width: 800px;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+}
+
+.hex-bg {
+  position: absolute;
+  width: 900px;
+  height: 500px;
+}
+
+.text-wrapper > h3 {
+  margin-top: 0;
+}
+
+.text-wrapper > p {
+  margin: 0;
+}
+
+.text-wrapper {
+  margin-bottom: 100px;
+}
+
+@media (min-width: 1280px) {
+  #connect-section,
+  #frontend-section,
+  #backend-section {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .flex-gutter {
+    flex: 1 0 30px;
+  }
+
+  .text-wrapper {
+    margin-bottom: 40px;
+    min-width: 350px;
+  }
 }
