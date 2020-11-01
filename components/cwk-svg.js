@@ -1,6 +1,6 @@
 class CwkSvg extends HTMLElement {
   connectedCallback() {
-    const id = this.getAttribute("id");
+    const id = this.getAttribute("svg-id");
     import(`../assets/svg/${id}.js`).then((svg) => {
       this.innerHTML = `
         ${svg.default}

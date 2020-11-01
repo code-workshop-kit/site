@@ -22,6 +22,16 @@ body {
   font-size: 16px;
 }
 
+/* cwk-svg[svg-id="hex"] {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  cwk-svg[svg-id="hex"] {
+    display: block;
+  }
+} */
+
 /*
  *                            *
  *                            *
@@ -85,7 +95,6 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 40px;
   max-width: var(--cwk-full-width);
 }
 
@@ -127,8 +136,8 @@ section {
 }
 
 #cta-section {
+  padding: 0 40px;
   text-align: center;
-  max-width: max-content;
   margin-left: auto;
   margin-right: auto;
 }
@@ -165,12 +174,6 @@ section {
 
 #copy-npm-btn,
 .cta-buttons > a {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-#copy-npm-btn,
-.cta-buttons > a {
   font-size: 14px;
   line-height: 20px;
   border-radius: 6px;
@@ -196,7 +199,6 @@ section {
 }
 
 .ref-buttons > a {
-  margin-left: 8px;
   font-family: Roboto Slab, sans-serif;
   font-weight: bold;
   font-size: 10px;
@@ -217,6 +219,16 @@ section {
 
   h2 {
     font-size: 26px;
+  }
+
+  #copy-npm-btn,
+  .cta-buttons > a {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .ref-buttons > a {
+    margin-left: 8px;
   }
 
   .cta-buttons > a,
@@ -264,7 +276,6 @@ section {
 .video-wrapper {
   max-width: 800px;
   display: flex;
-  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 20px 60px var(--cwk-video-shadow);
 }
@@ -275,7 +286,7 @@ section {
 
 .hex-bg {
   position: absolute;
-  width: 100%;
+  width: 140%;
   max-width: 1000px;
   transform: translateY(80px);
   z-index: -1;
@@ -299,11 +310,28 @@ section {
 
 .text-wrapper {
   margin-bottom: 50px;
+  padding: 0 40px;
+}
+
+@media (min-width: 420px) {
+  .hex-bg {
+    transform: translateY(120px);
+  }
+
+  #frontend-section .hex-bg {
+    transform: translateY(180px);
+  }
 }
 
 @media (min-width: 600px) {
   .text-wrapper {
     margin-bottom: 100px;
+  }
+}
+
+@media (min-width: 840px) {
+  .video-wrapper {
+    border-radius: 10px;
   }
 }
 
@@ -353,8 +381,7 @@ section {
 }
 
 #signup-section > .signup-wrapper {
-  padding: 70px 0;
-  border-radius: 20px;
+  padding: 70px 30px;
   background: radial-gradient(
     circle at 50%,
     #5d646b,
@@ -407,6 +434,16 @@ section {
   box-shadow: 0 0 0 2px var(--cwk-primary-blue), 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
+@media (min-width: 840px) {
+  #signup-section {
+    padding: 0 40px;
+  }
+
+  #signup-section > .signup-wrapper {
+    border-radius: 20px;
+  }
+}
+
 /*
  *                            *
  *                            *
@@ -420,6 +457,7 @@ section {
 #selling-points-section {
   max-width: var(--cwk-content-width);
   margin: 0 auto;
+  padding: 0 40px;
   display: grid;
   column-gap: 150px;
   grid-template-areas: "a" "a" "a" "a" "a" "a";
