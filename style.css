@@ -277,7 +277,7 @@ section {
 
 .hex-bg {
   position: absolute;
-  width: 140%;
+  width: 100%;
   max-width: 1000px;
   transform: translateY(80px);
   z-index: -1;
