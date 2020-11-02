@@ -273,11 +273,12 @@ section {
 
 .video-wrapper video {
   width: 100%;
+  height: 100%;
 }
 
 .hex-bg {
   position: absolute;
-  width: 140%;
+  width: 100%;
   max-width: 1000px;
   transform: translateY(80px);
   z-index: -1;
@@ -322,6 +323,10 @@ section {
 
 @media (min-width: 840px) {
   .video-wrapper {
+    border-radius: 10px;
+  }
+
+  .video-wrapper video {
     border-radius: 10px;
   }
 }
