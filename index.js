@@ -16,4 +16,29 @@ const setupCopyBtn = () => {
     copyTimeout = setTimeout(() => (copyBtn.innerHTML = copyBtnInner), 2000);
   });
 };
+
+const setupEmailSubscription = () => {
+  const emailSubscription = async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email-address-input").value;
+    if (email) {
+      const response = await fetch("/api/subscribe-updates", {
+        method: "POST",
+        body: email,
+      });
+      if (response.status === 200) {
+        const subBtn = document.getElementById("subscribe-button");
+        subBtn.classList.add("subscribed");
+        subBtn.innerText = "Subscribed!";
+      }
+    }
+  };
+
+  document
+    .getElementById("subscribe-form")
+    .addEventListener("submit", emailSubscription);
+};
+
 setupCopyBtn();
+setupEmailSubscription();

@@ -399,11 +399,25 @@ section {
   margin: 16px auto;
 }
 
-#signup-section a {
+#signup-section label {
+  display: block;
+  padding-top: 10px;
+}
+
+#signup-section input {
+  border-radius: 4px;
+  height: 34px;
+  margin: 10px;
+  border: none;
+  min-width: 200px;
+}
+
+#subscribe-button {
+  display: inline-block;
+  border: none;
   font-family: Roboto Slab, sans-serif;
   font-weight: normal;
-  display: inline-block;
-  margin-top: 20px;
+  margin: 10px auto 0 auto;
   padding: 10px 15px;
   background: linear-gradient(
     0.15turn,
@@ -415,19 +429,31 @@ section {
   text-decoration: none;
 }
 
-#signup-section a:focus {
+#subscribe-button.subscribed {
+  border-bottom: solid 4px var(--cwk-primary-green);
+}
+
+#subscribe-button:focus {
   box-shadow: 0 0 0 2px var(--cwk-primary-blue);
   outline: none;
 }
 
-#signup-section a:hover {
+#subscribe-button.subscribed:focus {
+  box-shadow: 0 0 0 2px var(--cwk-primary-green);
+}
+
+#subscribe-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: all 0.15s ease;
 }
 
-#signup-section a:hover:focus {
+#subscribe-button:hover:focus {
   box-shadow: 0 0 0 2px var(--cwk-primary-blue), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#subscribe-button.subscribed:hover:focus {
+  box-shadow: 0 0 0 2px var(--cwk-primary-green), 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 840px) {
