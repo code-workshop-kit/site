@@ -30,7 +30,7 @@ const setupEmailSubscription = () => {
         },
         body: JSON.stringify({ email }),
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
         subBtn.classList.add("subscribed");
         subBtn.innerText = "Subscribed!";
       } else if (response.status === 400) {
