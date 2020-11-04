@@ -25,7 +25,7 @@ const setupEmailSubscription = () => {
     if (email) {
       const response = await fetch("/api/subscribe-updates", {
         method: "POST",
-        body: { email },
+        body: JSON.stringify({ email }),
       });
       if (response.status === 200) {
         subBtn.classList.add("subscribed");
