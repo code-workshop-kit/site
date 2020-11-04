@@ -25,12 +25,17 @@ const setupEmailSubscription = () => {
     if (email) {
       const response = await fetch("/api/subscribe-updates", {
         method: "POST",
-        body: email,
+        body: { email },
       });
       if (response.status === 200) {
         const subBtn = document.getElementById("subscribe-button");
         subBtn.classList.add("subscribed");
         subBtn.innerText = "Subscribed!";
+      } else if (response.status === 400) {
+        subBtn.classList.add("error");
+        subBtn.innerText = "Failed..";
+        const { message } = await response.json();
+        throw new Error(`Error 400: ${message}`);
       }
     }
   };
