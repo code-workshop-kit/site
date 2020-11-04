@@ -122,7 +122,18 @@ h2 {
 }
 
 section {
-  margin-bottom: 250px;
+  margin-bottom: 200px;
+}
+
+section:first-child {
+  margin-bottom: 125px;
+}
+
+@media (min-width: 1600px) {
+  section,
+  section:first-child {
+    margin-bottom: 250px;
+  }
 }
 
 #cta-section {
