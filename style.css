@@ -209,8 +209,8 @@ section:first-child {
   color: var(--cwk-light);
   background: linear-gradient(
     0.15turn,
-    var(--cwk-primary-green),
-    var(--cwk-secondary-green)
+    var(--cwk-secondary-green),
+    var(--cwk-primary-green)
   );
 }
 
