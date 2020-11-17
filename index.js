@@ -1,6 +1,6 @@
 import "./components/cwk-svg.js";
 
-// TODO: check that this deferred loading of font is not bad experience. It saves 0.4 seconds on FCP/LCP doing this though, so might be worth it.
+// TODO: check that this deferred loading of font is not bad experience. It saves 0.4 seconds on FCP/LCP doing this though, so might be worth it?
 window.addEventListener("load", () => {
   import("./loadDankMonoFont.js");
 });
