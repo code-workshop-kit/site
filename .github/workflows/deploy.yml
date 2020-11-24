@@ -27,5 +27,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           ssh_private_key: ${{ secrets.SSH_KEY }}
           local_path: './dist/*'
-          remote_path: '/var/www/code-workshop-kit.com/test-html'
+          remote_path: '/var/www/code-workshop-kit.com/html'
           args: '-o ConnectTimeout=5'
