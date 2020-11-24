@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  publish:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -14,10 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Deploy through SSH + git pull
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_ADDRESS }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: cd /var/www/code-workshop-kit.com/html && git pull
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build with Rollup
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          sftp put -r ./dist/* /var/www/code-workshop-kit.com/test-html -o StrictHostKeyChecking=no -o ConnectTimeout=5 -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_ADDRESS }}
