@@ -21,5 +21,11 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        run: |
-          sftp put -r ./dist/* /var/www/code-workshop-kit.com/test-html -o StrictHostKeyChecking=no -o ConnectTimeout=5 -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_ADDRESS }}
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          server: ${{ secrets.SSH_ADDRESS }}
+          username: ${{ secrets.SSH_USER }}
+          ssh_private_key: ${{ secrets.SSH_KEY }}
+          local_path: './dist/*'
+          remote_path: '/var/www/code-workshop-kit.com/test-html'
+          args: '-o ConnectTimeout=5'
