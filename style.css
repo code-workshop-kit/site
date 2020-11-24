@@ -1,25 +1,76 @@
 :root {
+  --cwk-lighter-blue: #6fa7df;
   --cwk-primary-blue: #4e88c2;
   --cwk-secondary-blue: #34618e;
   --cwk-darkest: #00060d;
   --cwk-dark: #24292e;
+  --cwk-darker: #1b1e22;
   --cwk-primary-green: #4eb860;
   --cwk-secondary-green: #24853b;
-  --cwk-light: #ffffff;
+  --cwk-primary-yellow: #eeea1b;
+  --cwk-secondary-yellow: #c8be25;
+  --cwk-lightest: #ffffff;
+  --cwk-light: #dddddd;
   --cwk-video-shadow: #00142a60;
   --cwk-full-width: 1480px;
   --cwk-content-width: 1150px;
+}
+
+body.light {
+  --text-color: var(--cwk-dark);
+  --link-color: var(--cwk-secondary-blue);
+  --nav-color: var(--cwk-dark);
+  --nav-text-color: var(--cwk-lightest);
+  --body-background-color: var(--cwk-lightest);
+  --signup-text-color: var(--cwk-lightest);
+  --signup-radial-inner: #5d646b;
+  --signup-radial-outer: var(--cwk-dark);
   --cwk-hex-glow: hsla(210, 30%, 53%, 0.3);
+  --cwk-hex-fill: var(--cwk-lightest);
+}
+
+body.dark {
+  --text-color: var(--cwk-light);
+  --link-color: var(--cwk-lighter-blue);
+  --nav-color: var(--cwk-darker);
+  --nav-text-color: var(--cwk-light);
+  --body-background-color: var(--cwk-dark);
+  --signup-text-color: var(--cwk-light);
+  --signup-radial-inner: #43484e;
+  --signup-radial-outer: var(--cwk-darker);
+  --cwk-hex-glow: hsla(0, 0%, 85%, 0.3);
+  --cwk-hex-fill: var(--cwk-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --text-color: var(--cwk-light);
+    --nav-color: var(--cwk-darker);
+    --nav-text-color: var(--cwk-light);
+    --body-background-color: var(--cwk-dark);
+    --signup-text-color: var(--cwk-light);
+    --signup-radial-inner: #43484e;
+    --signup-radial-outer: var(--cwk-darker);
+    --cwk-hex-glow: hsla(0, 0%, 85%, 0.3);
+    --cwk-hex-fill: var(--cwk-dark);
+  }
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  color: var(--cwk-dark);
+  color: var(--text-color);
+  background-color: var(--body-background-color);
   font-family: Roboto, sans-serif;
   font-weight: lighter;
   font-size: 16px;
+  transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
+}
+
+polygon,
+polyline {
+  transition: fill 0.3s ease-in-out;
 }
 
 /*
@@ -33,7 +84,7 @@ body {
  *                            */
 
 .top-nav {
-  background-color: var(--cwk-dark);
+  background-color: var(--nav-color);
 }
 
 .top-nav-items {
@@ -44,7 +95,7 @@ body {
   padding: 0 40px;
 }
 
-.top-nav-items div {
+.top-nav-items > div {
   padding: 10px 0;
 }
 
@@ -52,20 +103,19 @@ body {
   font-family: Roboto Slab, sans-serif;
   font-weight: bold;
   text-decoration: none;
-  color: var(--cwk-light);
+  color: var(--nav-text-color);
 }
 
-.top-nav-items div:not(:first-child) {
+.top-nav-items > div:not(:first-child) {
   padding-left: 40px;
 }
 
-.top-nav-items .logo {
+.logo {
   font-size: 24px;
   flex-grow: 1;
 }
 
-.top-nav-items > .github-nav-logo {
-  color: var(--cwk-light);
+.github-nav-logo {
   width: 25px;
 }
 
@@ -178,7 +228,7 @@ section:first-child {
   font-size: 14px;
   line-height: 20px;
   border-radius: 6px;
-  color: var(--cwk-light);
+  color: var(--cwk-lightest);
 }
 
 #copy-npm-btn {
@@ -194,7 +244,7 @@ section:first-child {
 }
 
 #copy-npm-btn svg {
-  color: var(--cwk-light);
+  color: var(--cwk-lightest);
   width: 16px;
   margin-left: 20px;
   vertical-align: sub;
@@ -206,7 +256,7 @@ section:first-child {
   font-size: 10px;
   padding: 8px 20px;
   border-radius: 6px;
-  color: var(--cwk-light);
+  color: var(--cwk-lightest);
   background: linear-gradient(
     0.15turn,
     var(--cwk-secondary-green),
@@ -384,18 +434,18 @@ section:first-child {
   max-width: var(--cwk-content-width);
   text-align: center;
   margin: 0 auto 120px auto;
-  color: var(--cwk-light);
+  color: var(--signup-text-color);
 }
 
 #signup-section > .signup-wrapper {
   padding: 70px 30px;
   background: radial-gradient(
     circle at 50%,
-    #5d646b,
-    var(--cwk-dark),
+    var(--signup-radial-inner),
+    var(--signup-radial-outer),
     140%,
-    var(--cwk-dark),
-    var(--cwk-dark)
+    var(--signup-radial-outer),
+    var(--signup-radial-outer)
   );
 }
 
@@ -435,7 +485,7 @@ section:first-child {
     var(--cwk-secondary-blue),
     var(--cwk-primary-blue)
   );
-  color: var(--cwk-light);
+  color: var(--cwk-lightest);
   border-radius: 6px;
   text-decoration: none;
 }
@@ -508,7 +558,7 @@ section:first-child {
 }
 
 #selling-points-section p > a {
-  color: var(--cwk-secondary-blue);
+  color: var(--link-color);
   font-weight: normal;
   text-decoration: none;
 }
