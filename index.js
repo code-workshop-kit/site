@@ -1,4 +1,5 @@
 import "./components/cwk-svg.js";
+import "./components/cwk-theme-switcher.js";
 
 // TODO: check that this deferred loading of font is not bad experience. It saves 0.4 seconds on FCP/LCP doing this though, so might be worth it?
 window.addEventListener("load", () => {
