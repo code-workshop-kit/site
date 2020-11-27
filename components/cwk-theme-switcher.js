@@ -95,11 +95,9 @@ class CwkThemeSwitcher extends HTMLElement {
   }
 
   insertTransitionStyles() {
-    const [mainStylesheet] = Array.from(
-      document.styleSheets
-    ).filter((stylesheet) => stylesheet.href.endsWith("style.css"));
-
-    console.log(mainStylesheet);
+    const [mainStylesheet] = Array.from(document.styleSheets).filter(
+      (stylesheet) => stylesheet.title === "main styles"
+    );
 
     mainStylesheet.insertRule(
       "html, body { transition: background 0.3s ease-in-out, color 0.6s ease-in-out }",
@@ -117,13 +115,12 @@ class CwkThemeSwitcher extends HTMLElement {
       <style>
         :host {
           cursor: pointer;
-
         }
 
         :host(:focus) {
           outline: none;
-    box-shadow: 0 0 0 2px var(--cwk-lighter-blue);
-    border-radius: 12px;
+          box-shadow: 0 0 0 2px var(--cwk-lighter-blue);
+          border-radius: 12px;
         }
 
         .container {
