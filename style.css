@@ -65,12 +65,6 @@ body {
   font-family: Roboto, sans-serif;
   font-weight: lighter;
   font-size: 16px;
-  transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
-}
-
-polygon,
-polyline {
-  transition: fill 0.3s ease-in-out;
 }
 
 /*

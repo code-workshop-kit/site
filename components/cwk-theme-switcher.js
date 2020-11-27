@@ -15,10 +15,28 @@ class CwkThemeSwitcher extends HTMLElement {
     this.setAttribute("theme", value);
   }
 
+  toggle() {
+    const newVal = this.theme === "light" ? "dark" : "light";
+    localStorage.setItem("cwk-theme", newVal);
+    this.theme = newVal;
+  }
+
   connectedCallback() {
     this.attachShadow({ mode: "open" });
     this.render();
     this.setup();
+  }
+
+  setup() {
+    this.setupInitialTheme();
+    this.setAttribute("tabindex", 0);
+    this.setAttribute("aria-label", "Site theme toggler, dark and light");
+
+    const boundKeyDown = this.keyDown.bind(this);
+    this.addEventListener("keydown", boundKeyDown);
+
+    const boundToggle = this.toggle.bind(this);
+    this.addEventListener("click", boundToggle);
   }
 
   setupInitialTheme() {
@@ -35,7 +53,10 @@ class CwkThemeSwitcher extends HTMLElement {
         ? "light"
         : null || "light";
 
+    // Insert transition styles after adding the theme class,
+    // so the initial theme setting does not get a CSS transition
     document.body.classList.add(this.theme);
+    this.insertTransitionStyles();
 
     // Respond to user preference changes on OS and Browser
     window
@@ -48,18 +69,6 @@ class CwkThemeSwitcher extends HTMLElement {
           this.theme = "light";
         }
       });
-  }
-
-  setup() {
-    this.setupInitialTheme();
-
-    this.setAttribute("tabindex", 0);
-
-    const boundKeyDown = this.keyDown.bind(this);
-    this.addEventListener("keydown", boundKeyDown);
-
-    const boundToggle = this.toggle.bind(this);
-    this.addEventListener("click", boundToggle);
   }
 
   keyDown(ev) {
@@ -85,10 +94,22 @@ class CwkThemeSwitcher extends HTMLElement {
     }
   }
 
-  toggle() {
-    const newVal = this.theme === "light" ? "dark" : "light";
-    localStorage.setItem("cwk-theme", newVal);
-    this.theme = newVal;
+  insertTransitionStyles() {
+    const [mainStylesheet] = Array.from(
+      document.styleSheets
+    ).filter((stylesheet) => stylesheet.href.endsWith("style.css"));
+
+    console.log(mainStylesheet);
+
+    mainStylesheet.insertRule(
+      "html, body { transition: background 0.3s ease-in-out, color 0.6s ease-in-out }",
+      0
+    );
+
+    mainStylesheet.insertRule(
+      "polygon, polyline { transition: fill 0.3s ease-in-out }",
+      0
+    );
   }
 
   render() {
@@ -96,6 +117,13 @@ class CwkThemeSwitcher extends HTMLElement {
       <style>
         :host {
           cursor: pointer;
+
+        }
+
+        :host(:focus) {
+          outline: none;
+    box-shadow: 0 0 0 2px var(--cwk-lighter-blue);
+    border-radius: 12px;
         }
 
         .container {
