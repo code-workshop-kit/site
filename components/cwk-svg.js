@@ -1,6 +1,6 @@
 class CwkSvg extends HTMLElement {
   connectedCallback() {
-    const id = this.getAttribute("svg-id");
+    const id = this.getAttribute('svg-id');
     import(`../assets/svg/${id}.js`).then((svg) => {
       this.innerHTML = `
         ${svg.default}
@@ -8,4 +8,4 @@ class CwkSvg extends HTMLElement {
     });
   }
 }
-customElements.define("cwk-svg", CwkSvg);
+customElements.define('cwk-svg', CwkSvg);
