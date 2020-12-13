@@ -11,8 +11,11 @@ export default {
     importMetaAssets(),
     // These assets are not taken care of through importMetaAssets, because they are html src/href attributes
     copy({
-      targets: [{ src: "assets/video", dest: "dist/assets" }],
-      targets: [{ src: "assets/images", dest: "dist/assets" }],
+      targets: [
+        { src: "assets/images", dest: "dist/assets" },
+        { src: "assets/video", dest: "dist/assets" },
+        { src: "favicon.ico", dest: "dist" },
+      ],
     }),
     dynamicImportVars({}),
   ],
