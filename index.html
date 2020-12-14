@@ -8,14 +8,6 @@
       content="Code-workshop-kit, the future of remote coding workshops and training."
     />
     <title>code-workshop-kit</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./style.css" title="main styles" />
     <script type="module" src="./index.js"></script>
   </head>
@@ -33,9 +25,7 @@
           >
         </div>
         <div class="github-nav-logo">
-          <a
-            aria-label="GitHub page"
-            href="https://github.com/code-workshop-kit/code-workshop-kit"
+          <a aria-label="GitHub page" href="https://github.com/code-workshop-kit/code-workshop-kit"
             ><svg
               aria-hidden="true"
               focusable="false"
@@ -86,10 +76,7 @@
             href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare"
             >VS Code Live Share</a
           >
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://modern-web.dev/docs/dev-server/overview/"
+          <a target="_blank" rel="noopener" href="https://modern-web.dev/docs/dev-server/overview/"
             >@web/dev-server</a
           >
         </div>
@@ -99,17 +86,8 @@
           <cwk-svg svg-id="hex"></cwk-svg>
         </div>
         <div class="video-wrapper">
-          <video
-            muted
-            loop
-            autoplay
-            playsinline
-            poster="./assets/images/connect.webp"
-          >
-            <source
-              src="./assets/video/connect-scaffold.mp4"
-              type="video/mp4"
-            />
+          <video muted loop autoplay playsinline poster="./assets/images/connect.webp">
+            <source src="./assets/video/connect-scaffold.mp4" type="video/mp4" />
           </video>
         </div>
         <div class="flex-gutter"></div>
@@ -130,13 +108,7 @@
           <cwk-svg svg-id="hex"></cwk-svg>
         </div>
         <div class="video-wrapper">
-          <video
-            muted
-            loop
-            autoplay
-            playsinline
-            poster="./assets/images/frontend.webp"
-          >
+          <video muted loop autoplay playsinline poster="./assets/images/frontend.webp">
             <source src="./assets/video/frontend.mp4" type="video/mp4" />
           </video>
         </div>
@@ -146,13 +118,7 @@
           <cwk-svg svg-id="hex"></cwk-svg>
         </div>
         <div class="video-wrapper">
-          <video
-            muted
-            loop
-            autoplay
-            playsinline
-            poster="./assets/images/backend.webp"
-          >
+          <video muted loop autoplay playsinline poster="./assets/images/backend.webp">
             <source src="./assets/video/backend.mp4" type="video/mp4" />
           </video>
         </div>
@@ -167,13 +133,12 @@
         <div class="signup-wrapper">
           <h3>Sign up for more</h3>
           <p>
-            code-workshop-kit is v1, but a lot more work will be done for small
-            fixes and adding more in-depth guides on giving interactive code
-            workshops.
+            code-workshop-kit is v1, but a lot more work will be done for small fixes and adding
+            more in-depth guides on giving interactive code workshops.
           </p>
           <p>
-            Sign up with your email address and I will keep you posted about
-            major updates and changes.
+            Sign up with your email address and I will keep you posted about major updates and
+            changes.
           </p>
           <form id="subscribe-form">
             <label for="email-address-input">E-Mail Address</label>
@@ -186,54 +151,50 @@
         <div>
           <h4>What is it?</h4>
           <p>
-            <a
-              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+            <a href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
               >code-workshop-kit</a
             >
-            is a combination of tools to enhance collaboration specifically in a
-            workshop, tutorial or training environment
+            is a combination of tools to enhance collaboration specifically in a workshop, tutorial
+            or training environment
           </p>
         </div>
         <div>
           <h4>Why now?</h4>
           <p>
-            Remote workshops have been upcoming for multiple years but now with
-            COVID-19 dominating our lives, this seemed like the right time.
+            Remote workshops have been upcoming for multiple years but now with COVID-19 dominating
+            our lives, this seemed like the right time.
           </p>
           <p>
-            As a trainer myself, I had a need for this: to recreate the
-            interactive environment of a real life workshop or training.
+            As a trainer myself, I had a need for this: to recreate the interactive environment of a
+            real life workshop or training.
           </p>
         </div>
         <div>
           <h4>Shared input</h4>
           <p>
             The tool is meant to be used on top of
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare"
+            <a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare"
               >Visual Studio's Live Share extension</a
-            >. This enables hosts & participants to see each other's code
-            similar to how Google Docs works.
+            >. This enables hosts & participants to see each other's code similar to how Google Docs
+            works.
           </p>
         </div>
         <div>
           <h4>Shared output</h4>
           <p>
             The toolkit makes use of an extension of
-            <code>@web/dev-server</code>, as well as Live Share's "shared
-            servers" feature, which allows hosts & participants to see the
-            output of each other's code. Either backendn through a terminal
-            portal, or frontend.
+            <code>@web/dev-server</code>, as well as Live Share's "shared servers" feature, which
+            allows hosts & participants to see the output of each other's code. Either backendn
+            through a terminal portal, or frontend.
           </p>
         </div>
         <div>
           <h4>Support for frontend & backend</h4>
           <p>
-            The dev server works by default for frontend workshops as it just
-            serves the participants root either as an iframe or by importing a
-            default module from their entrypoints. For backend, a terminal
-            portal is spawned, the host can control which command is ran. For
-            example <code>javac Main.java && java Main</code>. This also
+            The dev server works by default for frontend workshops as it just serves the
+            participants root either as an iframe or by importing a default module from their
+            entrypoints. For backend, a terminal portal is spawned, the host can control which
+            command is ran. For example <code>javac Main.java && java Main</code>. This also
             supports terminal input through typing in the portal.
           </p>
         </div>
@@ -241,10 +202,24 @@
           <h4>How can I find out more?</h4>
           <p>
             All of the documentation can be found on the
-            <a
-              href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
+            <a href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
               >Github repository of code-workshop-kit</a
             >.
+          </p>
+          <p>
+            I also published an extensive
+            <a
+              target="_blank"
+              href="https://dev.to/jorenbroekema/code-workshop-kit-a-tool-for-remote-code-workshops-7hm"
+              >blog on Dev.to</a
+            >
+            and
+            <a
+              target="_blank"
+              href="https://joren-broekema.medium.com/code-workshop-kit-a-tool-for-remote-code-workshops-e5e538158cf0"
+              >Medium</a
+            >
+            about code-workshop-kit.
           </p>
         </div>
       </section>

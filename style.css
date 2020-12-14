@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(''), url('../assets/fonts/roboto-v20-latin-regular.woff2') format('woff2'),
+    url('../assets/fonts/roboto-v20-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local(''), url('../assets/fonts/roboto-v20-latin-300.woff2') format('woff2'),
+    url('../assets/fonts/roboto-v20-latin-300.woff') format('woff');
+}
+
 :root {
   --cwk-lighter-blue: #6fa7df;
   --cwk-primary-blue: #4e88c2;
@@ -230,11 +248,7 @@ section:first-child {
   cursor: pointer;
   font-family: Dank Mono, sans-serif;
   padding: 10px 15px;
-  background: linear-gradient(
-    0.15turn,
-    var(--cwk-secondary-blue),
-    var(--cwk-primary-blue)
-  );
+  background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
 }
 
 #copy-npm-btn svg {
@@ -251,11 +265,7 @@ section:first-child {
   padding: 8px 20px;
   border-radius: 6px;
   color: var(--cwk-lightest);
-  background: linear-gradient(
-    0.15turn,
-    var(--cwk-secondary-green),
-    var(--cwk-primary-green)
-  );
+  background: linear-gradient(0.15turn, var(--cwk-secondary-green), var(--cwk-primary-green));
 }
 
 @media (min-width: 600px) {
@@ -474,11 +484,7 @@ section:first-child {
   font-weight: normal;
   margin: 10px auto 0 auto;
   padding: 10px 15px;
-  background: linear-gradient(
-    0.15turn,
-    var(--cwk-secondary-blue),
-    var(--cwk-primary-blue)
-  );
+  background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
   color: var(--cwk-lightest);
   border-radius: 6px;
   text-decoration: none;
@@ -537,7 +543,7 @@ section:first-child {
   padding: 0 40px;
   display: grid;
   column-gap: 150px;
-  grid-template-areas: "a" "a" "a" "a" "a" "a";
+  grid-template-areas: 'a' 'a' 'a' 'a' 'a' 'a';
   margin-bottom: 120px;
 }
 
@@ -564,7 +570,7 @@ section:first-child {
 @media (min-width: 840px) {
   #selling-points-section {
     column-gap: 75px;
-    grid-template-areas: "a a" "a a" "a a";
+    grid-template-areas: 'a a' 'a a' 'a a';
   }
 }
 
