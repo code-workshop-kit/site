@@ -41,29 +41,31 @@ class CwkThemeSwitcher extends HTMLElement {
 
   setupInitialTheme() {
     const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const userPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
     // Prio is: 1) saved preference 2) browser/os preference 3) default 'light'
-    this.theme =
-      localStorage.getItem('cwk-theme') || userPrefersDark
-        ? 'dark'
-        : null || userPrefersLight
-        ? 'light'
-        : null || 'light';
+    if (localStorage.getItem('cwk-theme')) {
+      this.theme = localStorage.getItem('cwk-theme');
+    } else if (userPrefersDark) {
+      this.theme = 'dark';
+    } else {
+      this.theme = 'light';
+    }
 
     // Insert transition styles after adding the theme class,
     // so the initial theme setting does not get a CSS transition
     document.body.classList.add(this.theme);
-    this.insertTransitionStyles();
 
     // Respond to user preference changes on OS and Browser
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev) => {
-      console.log('change', ev.matches);
       if (ev.matches) {
         this.theme = 'dark';
       } else {
         this.theme = 'light';
       }
+    });
+
+    requestAnimationFrame(() => {
+      this.insertTransitionStyles();
     });
   }
 
@@ -91,16 +93,11 @@ class CwkThemeSwitcher extends HTMLElement {
   }
 
   insertTransitionStyles() {
-    const [mainStylesheet] = Array.from(document.styleSheets).filter(
-      (stylesheet) => stylesheet.title === 'main styles',
+    document.body.style.setProperty(
+      '--cwk-background-transition',
+      'background 0.3s ease-in-out, color 0.6s ease-in-out',
     );
-
-    mainStylesheet.insertRule(
-      'html, body { transition: background 0.3s ease-in-out, color 0.6s ease-in-out }',
-      0,
-    );
-
-    mainStylesheet.insertRule('polygon, polyline { transition: fill 0.3s ease-in-out }', 0);
+    document.body.style.setProperty('--cwk-fill-transition', 'fill 0.3s ease-in-out');
   }
 
   render() {

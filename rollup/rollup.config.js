@@ -5,8 +5,8 @@ const { importMetaAssets } = require('@web/rollup-plugin-import-meta-assets');
 const { terser } = require('rollup-plugin-terser');
 const csso = require('csso');
 
-export default {
-  input: 'index.html',
+module.exports = {
+  input: './pages/*.html',
   output: { dir: 'dist' },
   plugins: [
     html({
@@ -14,7 +14,7 @@ export default {
         (content, filePath) => {
           if (filePath.endsWith('.css')) {
             let cssContent = content.toString('utf-8');
-            return csso.minify(cssContent).css.replace('../assets/fonts', './fonts');
+            return csso.minify(cssContent).css.replace(/..\/assets\/fonts/g, './fonts');
           }
         },
       ],

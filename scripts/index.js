@@ -1,9 +1,11 @@
-import './components/cwk-svg.js';
-import './components/cwk-theme-switcher.js';
+import '../components/cwk-svg.js';
+import '../components/cwk-nav.js';
+import './loadDankMonoFont.js';
 
-// TODO: check that this deferred loading of font is not bad experience. It saves 0.4 seconds on FCP/LCP doing this though, so might be worth it?
+// Weird issue where scroll isn't properly set to top
+// This seems to help it :|....
 window.addEventListener('load', () => {
-  import('./loadDankMonoFont.js');
+  scrollTo(0, 0);
 });
 
 const setupCopyBtn = () => {
