@@ -24,48 +24,6 @@ body.dark {
   }
 }
 
-.top-nav {
-  display: block;
-  height: 52px;
-  background-color: var(--nav-color);
-}
-
-.top-nav-items {
-  display: flex;
-  align-items: center;
-  max-width: var(--cwk-full-width);
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.top-nav-items > div {
-  padding: 10px 0;
-}
-
-.top-nav-items a {
-  font-family: Roboto Slab, sans-serif;
-  font-weight: bold;
-  text-decoration: none;
-  color: var(--nav-text-color);
-}
-
-.top-nav-items > div:not(:first-child) {
-  padding-left: 40px;
-}
-
-.top-nav-logo {
-  font-size: 24px;
-  flex-grow: 1;
-}
-
-.github-nav-logo {
-  width: 25px;
-}
-
-.github-nav-logo svg {
-  vertical-align: middle;
-}
-
 /*
  *                            *
  *                            *

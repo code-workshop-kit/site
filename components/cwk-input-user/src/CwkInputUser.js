@@ -3,6 +3,12 @@ import { CwkInput } from '../../cwk-input/src/CwkInput.js';
 import { MinMaxLength, IllegalPattern, Required } from '../../cwk-input/src/validators.js';
 
 export class CwkInputUser extends LocalizeMixin(CwkInput) {
+  static get properties() {
+    return {
+      creating: { attribute: false },
+    };
+  }
+
   static get localizeNamespaces() {
     return [
       {
@@ -15,10 +21,19 @@ export class CwkInputUser extends LocalizeMixin(CwkInput) {
 
   constructor() {
     super();
-    this.validators = [
-      new Required(),
-      new IllegalPattern(/[^!-~]/),
-      new MinMaxLength({ min: 4, max: 32 }),
-    ];
+    this.creating = false;
+    this.validators = [new Required()];
+  }
+
+  updated(changedProperties) {
+    super.updated(changedProperties);
+    if (changedProperties.has('creating') && this.creating) {
+      this.addUserCreatingValidators();
+      this.validate();
+    }
+  }
+
+  addUserCreatingValidators() {
+    this.validators.push(new IllegalPattern(/[^!-~]/), new MinMaxLength({ min: 4, max: 32 }));
   }
 }
