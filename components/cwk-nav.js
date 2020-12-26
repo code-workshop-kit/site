@@ -1,8 +1,12 @@
 import './cwk-theme-switcher.js';
 
 class CwkNav extends HTMLElement {
-  connectedCallback() {
+  constructor() {
+    super();
     this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
     this.setAttribute('role', 'navigation');
     this.setAttribute('aria-label', 'Main');
     this.render();

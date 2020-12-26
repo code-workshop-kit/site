@@ -3,12 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      name="description"
+      content="Code-workshop-kit, the future of remote coding workshops and training."
+    />
+    <title>code-workshop-kit</title>
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/dashboard.css" />
+    <script type="module" src="../scripts/dashboard.js"></script>
   </head>
   <body>
     <cwk-nav></cwk-nav>
-    <script type="module" src="../scripts/dashboard.js"></script>
+    <main>
+      <cwk-form label="Sign in">
+        <form>
+          <cwk-input-user label="Username" name="username"></cwk-input-user>
+          <cwk-input-password label="Password" name="password"></cwk-input-password>
+          <div class="login-signup-buttons">
+            <button id="login-btn">Login</button>
+            <button id="signup-btn">Sign up</button>
+          </div>
+        </form>
+      </cwk-form>
+    </main>
   </body>
 </html>

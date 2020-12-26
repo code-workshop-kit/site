@@ -21,8 +21,12 @@ class CwkThemeSwitcher extends HTMLElement {
     this.theme = newVal;
   }
 
-  connectedCallback() {
+  constructor() {
+    super();
     this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
     this.render();
     this.setup();
   }
@@ -65,7 +69,11 @@ class CwkThemeSwitcher extends HTMLElement {
     });
 
     requestAnimationFrame(() => {
-      this.insertTransitionStyles();
+      document.body.style.setProperty(
+        '--cwk-background-transition',
+        'background 0.3s ease-in-out, color 0.6s ease-in-out',
+      );
+      document.body.style.setProperty('--cwk-fill-transition', 'fill 0.3s ease-in-out');
     });
   }
 
@@ -90,14 +98,6 @@ class CwkThemeSwitcher extends HTMLElement {
         break;
       /* no default */
     }
-  }
-
-  insertTransitionStyles() {
-    document.body.style.setProperty(
-      '--cwk-background-transition',
-      'background 0.3s ease-in-out, color 0.6s ease-in-out',
-    );
-    document.body.style.setProperty('--cwk-fill-transition', 'fill 0.3s ease-in-out');
   }
 
   render() {

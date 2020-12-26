@@ -2,12 +2,6 @@ import '../components/cwk-svg.js';
 import '../components/cwk-nav.js';
 import './loadDankMonoFont.js';
 
-// Weird issue where scroll isn't properly set to top
-// This seems to help it :|....
-window.addEventListener('load', () => {
-  scrollTo(0, 0);
-});
-
 const setupCopyBtn = () => {
   let copyTimeout;
   const copyBtn = document.getElementById('copy-npm-btn');
@@ -16,7 +10,9 @@ const setupCopyBtn = () => {
     clearTimeout(copyTimeout);
     navigator.clipboard.writeText(copyBtn.innerText);
     copyBtn.innerText = 'Copied!';
-    copyTimeout = setTimeout(() => (copyBtn.innerHTML = copyBtnInner), 2000);
+    copyTimeout = setTimeout(() => {
+      copyBtn.innerHTML = copyBtnInner;
+    }, 2000);
   });
 };
 

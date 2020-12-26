@@ -1,0 +1,74 @@
+main {
+  margin: 0 auto;
+  width: max-content;
+}
+
+h1 {
+  font-family: Roboto Slab, sans-serif;
+  font-weight: bold;
+  font-size: 35px; /* 50px */
+  margin-bottom: 20px;
+  margin-top: 75px;
+  text-align: center;
+}
+
+.login-signup-buttons {
+  display: flex;
+}
+
+.login-signup-buttons button {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+#login-btn,
+#signup-btn {
+  font-size: 14px;
+  font-family: Roboto Slab, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  color: var(--cwk-lightest);
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+#login-btn {
+  transition: width 0.5s ease-in-out;
+  background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
+}
+
+#signup-btn {
+  margin-left: 15px;
+  background: linear-gradient(0.15turn, var(--cwk-darkest), var(--cwk-dark));
+}
+
+#login-btn:focus {
+  box-shadow: 0 0 0 2px var(--cwk-darkest);
+  outline: none;
+}
+
+#signup-btn:focus {
+  box-shadow: 0 0 0 2px var(--cwk-primary-blue);
+  outline: none;
+}
+
+#login-btn:hover,
+#signup-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+}
+
+#login-btn:focus:hover {
+  box-shadow: 0 0 0 2px var(--cwk-darkest), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#signup-btn:focus:hover {
+  box-shadow: 0 0 0 2px var(--cwk-primary-blue), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
