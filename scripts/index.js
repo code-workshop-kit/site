@@ -1,10 +1,6 @@
-import './components/cwk-svg.js';
-import './components/cwk-theme-switcher.js';
-
-// TODO: check that this deferred loading of font is not bad experience. It saves 0.4 seconds on FCP/LCP doing this though, so might be worth it?
-window.addEventListener('load', () => {
-  import('./loadDankMonoFont.js');
-});
+import '../components/cwk-svg.js';
+import '../components/cwk-nav.js';
+import './loadDankMonoFont.js';
 
 const setupCopyBtn = () => {
   let copyTimeout;
@@ -14,7 +10,9 @@ const setupCopyBtn = () => {
     clearTimeout(copyTimeout);
     navigator.clipboard.writeText(copyBtn.innerText);
     copyBtn.innerText = 'Copied!';
-    copyTimeout = setTimeout(() => (copyBtn.innerHTML = copyBtnInner), 2000);
+    copyTimeout = setTimeout(() => {
+      copyBtn.innerHTML = copyBtnInner;
+    }, 2000);
   });
 };
 
