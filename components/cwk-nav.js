@@ -68,9 +68,6 @@ class CwkNav extends HTMLElement {
             >DOCS</a
           >
         </div>
-        <div>
-          <a href="./dashboard.html">DASHBOARD</a>
-        </div>
         <div class="github-nav-logo">
           <a aria-label="GitHub page" href="https://github.com/code-workshop-kit/code-workshop-kit"
             ><svg
