@@ -1,5 +1,6 @@
 import { css } from '@lion/core';
 import { LionForm } from '@lion/form';
+import { PasswordsMatch } from '../../cwk-input/src/validators.js';
 
 export class CwkForm extends LionForm {
   static get properties() {
@@ -42,15 +43,12 @@ export class CwkForm extends LionForm {
     this.isCreatingAccount = false;
     this.loginBtn.addEventListener('click', this.loginHandler.bind(this));
     this.signupBtn.addEventListener('click', this.signupHandler.bind(this));
-    this.addEventListener('submit', (ev) => ev.preventDefault());
   }
 
   async loginHandler() {
     this.clearNotification();
     if (this.hasFeedbackFor.includes('error')) {
-      this.formElements
-        .filter((elem) => elem.hasFeedbackFor.includes('error'))[0]
-        ._inputNode.focus();
+      this.focusFirstFieldWithError();
       return;
     }
 
@@ -68,26 +66,12 @@ export class CwkForm extends LionForm {
   signupHandler() {
     this.clearNotification();
     if (this.hasFeedbackFor.includes('error')) {
-      this.formElements
-        .filter((elem) => elem.hasFeedbackFor.includes('error'))[0]
-        ._inputNode.focus();
+      this.focusFirstFieldWithError();
       return;
     }
 
     if (!this.isCreatingAccount) {
-      this.isCreatingAccount = true;
-      this.label = 'Sign up';
-      this.signupBtn.remove();
-      this.formElements.username.creating = true;
-      this.formElements.password.creating = true;
-      this.loginBtn.innerText = 'Create Account';
-      const emailInput = document.createElement('cwk-input-email');
-      emailInput.label = 'E-Mail Address';
-      emailInput.name = 'email';
-      this.querySelector('cwk-input-password').insertAdjacentElement('afterend', emailInput);
-      requestAnimationFrame(() => {
-        emailInput._inputNode.focus();
-      });
+      this.transformFormToSignup();
     }
   }
 
@@ -147,5 +131,57 @@ export class CwkForm extends LionForm {
     if (notification) {
       notification.remove();
     }
+  }
+
+  focusFirstFieldWithError() {
+    this.formElements.filter((elem) => elem.hasFeedbackFor.includes('error'))[0]._inputNode.focus();
+  }
+
+  transformFormToSignup() {
+    // Change current foorm
+    this.isCreatingAccount = true;
+    this.label = 'Sign up';
+    this.signupBtn.remove();
+    this.formElements.username.creating = true;
+    this.formElements.password.creating = true;
+    this.loginBtn.innerText = 'Create Account';
+
+    // Add confirm password with match validation
+    const confirmPasswordInput = document.createElement('cwk-input-password');
+    confirmPasswordInput.creating = true;
+    confirmPasswordInput.label = 'Confirm Password';
+    confirmPasswordInput.name = 'password-confirm';
+    const initialPasswordInput = this.querySelector('[name=password]');
+    confirmPasswordInput.validators.push(
+      new PasswordsMatch({ first: initialPasswordInput, second: confirmPasswordInput }),
+    );
+    confirmPasswordInput.addEventListener('showsFeedbackForErrorChanged', () => {
+      initialPasswordInput.validators.push(
+        new PasswordsMatch({ first: confirmPasswordInput, second: initialPasswordInput }),
+      );
+      initialPasswordInput.validate();
+    });
+    initialPasswordInput.autocomplete = 'new-password';
+    confirmPasswordInput.autocomplete = 'new-password';
+    this.querySelector('.login-signup-buttons').insertAdjacentElement(
+      'beforebegin',
+      confirmPasswordInput,
+    );
+
+    // Add email input
+    const emailInput = document.createElement('cwk-input-email');
+    emailInput.label = 'E-Mail Address';
+    emailInput.name = 'email';
+    emailInput.autocomplete = 'email';
+    this.querySelector('.login-signup-buttons').insertAdjacentElement('beforebegin', emailInput);
+
+    // Focus the first field with error, or else focus the confirm password which is the next field
+    requestAnimationFrame(() => {
+      if (this.hasFeedbackFor.includes('error')) {
+        this.focusFirstFieldWithError();
+        return;
+      }
+      confirmPasswordInput._inputNode.focus();
+    });
   }
 }
