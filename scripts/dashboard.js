@@ -71,8 +71,8 @@ class CwkDashboard extends LitElement {
             name="password"
           ></cwk-input-password>
           <div class="login-signup-buttons">
-            <button type="button" id="login-btn">Login</button>
-            <button id="signup-btn">Sign up</button>
+            <button id="login-btn">Login</button>
+            <button type="button" id="signup-btn">Sign up</button>
           </div>
         </form>
       </cwk-form>

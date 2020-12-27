@@ -159,6 +159,9 @@ export class CwkForm extends LionForm {
       initialPasswordInput.validators.push(
         new PasswordsMatch({ first: confirmPasswordInput, second: initialPasswordInput }),
       );
+      // When user triggers confirm pw validation, we should consider initial as prefilled so that validation
+      // and feedback happens on both inputs.
+      initialPasswordInput.prefilled = true;
       initialPasswordInput.validate();
     });
     initialPasswordInput.autocomplete = 'new-password';
