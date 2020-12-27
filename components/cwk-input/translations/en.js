@@ -5,5 +5,6 @@ export default {
     IllegalPattern: '{fieldName} contains invalid characters.',
     Required: '{fieldName} is required.',
     IsEmail: 'Current value is not a valid E-Mail address.',
+    PasswordsMatch: "Passwords don't match.",
   },
 };

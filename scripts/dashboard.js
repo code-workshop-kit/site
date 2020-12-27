@@ -1,4 +1,4 @@
-import { html, css, LitElement } from '@lion/core';
+import { html, LitElement } from '@lion/core';
 
 import '../components/cwk-nav.js';
 import '../components/cwk-form/cwk-form.js';
@@ -11,83 +11,9 @@ import '../components/cwk-svg.js';
 import './loadDankMonoFont.js';
 
 class CwkDashboard extends LitElement {
-  static get styles() {
-    return css`
-      h1 {
-        font-family: Roboto Slab, sans-serif;
-        font-weight: bold;
-        font-size: 35px; /* 50px */
-        margin-bottom: 20px;
-        margin-top: 75px;
-        text-align: center;
-      }
-
-      .login-signup-buttons {
-        display: flex;
-      }
-
-      .login-signup-buttons button {
-        width: 100%;
-        display: block;
-        box-sizing: border-box;
-        text-decoration: none;
-        font-weight: normal;
-        margin-top: 5px;
-      }
-
-      #login-btn,
-      #signup-btn {
-        font-size: 14px;
-        font-family: Roboto Slab, sans-serif;
-        font-weight: bold;
-        text-transform: uppercase;
-        border-radius: 6px;
-        color: var(--cwk-lightest);
-        border: none;
-        cursor: pointer;
-        padding: 10px 15px;
-      }
-
-      #login-btn {
-        transition: width 0.5s ease-in-out;
-        background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
-      }
-
-      #signup-btn {
-        margin-left: 15px;
-        background: linear-gradient(0.15turn, var(--cwk-darkest), var(--cwk-dark));
-      }
-
-      #login-btn:focus {
-        box-shadow: 0 0 0 2px var(--cwk-darkest);
-        outline: none;
-      }
-
-      #signup-btn:focus {
-        box-shadow: 0 0 0 2px var(--cwk-primary-blue);
-        outline: none;
-      }
-
-      #login-btn:hover,
-      #signup-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        transition: all 0.15s ease;
-      }
-
-      #login-btn:focus:hover {
-        box-shadow: 0 0 0 2px var(--cwk-darkest), 0 4px 12px rgba(0, 0, 0, 0.5);
-      }
-
-      #signup-btn:focus:hover {
-        box-shadow: 0 0 0 2px var(--cwk-primary-blue), 0 4px 12px rgba(0, 0, 0, 0.5);
-      }
-    `;
-  }
-
   static get properties() {
     return {
-      authed: { attribute: false },
+      authed: { reflect: true },
       user: { attribute: false },
       loading: { attribute: false },
     };
@@ -111,12 +37,26 @@ class CwkDashboard extends LitElement {
     });
 
     if (response.status === 200) {
-      this.authed = true;
-      this.user = (await response.json()).data.username;
-    } else {
-      this.authed = false;
+      const result = await response.json();
+      if (result.status === 'success') {
+        this.user = result.data;
+        this.authed = true;
+      } else {
+        this.user = {};
+        this.authed = false;
+      }
     }
     this.loading = false;
+  }
+
+  async logout() {
+    const response = await fetch('/api/users/logout', {
+      credentials: 'include',
+    });
+
+    if (response.status === 200) {
+      this.checkAuth();
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -124,10 +64,14 @@ class CwkDashboard extends LitElement {
     return html`
       <cwk-form .dashboard=${this} label="Sign in">
         <form>
-          <cwk-input-user label="Username" name="username"></cwk-input-user>
-          <cwk-input-password label="Password" name="password"></cwk-input-password>
+          <cwk-input-user autocomplete="username" label="Username" name="username"></cwk-input-user>
+          <cwk-input-password
+            autocomplete="current-password"
+            label="Password"
+            name="password"
+          ></cwk-input-password>
           <div class="login-signup-buttons">
-            <button id="login-btn">Login</button>
+            <button type="button" id="login-btn">Login</button>
             <button id="signup-btn">Sign up</button>
           </div>
         </form>
@@ -137,13 +81,22 @@ class CwkDashboard extends LitElement {
 
   // eslint-disable-next-line class-methods-use-this
   dashboardTemplate() {
-    return html`<p>Welcome ${this.user}!</p>`;
+    return html`
+      <p>Welcome ${this.user.username}!</p>
+      <button id="logout-btn" @click=${this.logout}>Logout</button>
+    `;
   }
 
   render() {
     return html`${this.loading
       ? ''
       : html`${this.authed ? this.dashboardTemplate() : this.signinTemplate()}`} `;
+  }
+
+  createRenderRoot() {
+    // light dom so that password managers can access the signup/in form..
+    // if dashboard itself needs style encapsulation just create another WC
+    return this;
   }
 }
 customElements.define('cwk-dashboard', CwkDashboard);

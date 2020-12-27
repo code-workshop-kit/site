@@ -13,7 +13,7 @@ export class CwkInputPassword extends LocalizeMixin(CwkInput) {
     super();
     this.creating = false;
     this.type = 'password';
-    this.validators = [new Required()];
+    this.defaultValidators = [new Required()];
   }
 
   updated(changedProperties) {

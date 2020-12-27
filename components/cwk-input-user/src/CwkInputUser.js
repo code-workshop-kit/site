@@ -22,7 +22,7 @@ export class CwkInputUser extends LocalizeMixin(CwkInput) {
   constructor() {
     super();
     this.creating = false;
-    this.validators = [new Required()];
+    this.defaultValidators = [new Required()];
   }
 
   updated(changedProperties) {
