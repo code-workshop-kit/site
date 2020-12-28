@@ -34,6 +34,10 @@ export class CwkNotification extends LitElement {
         :host([type='success']) cwk-svg svg {
           fill: var(--cwk-primary-green);
         }
+
+        :host([type='warning']) cwk-svg svg {
+          fill: var(--cwk-primary-yellow);
+        }
       `,
     ];
   }
