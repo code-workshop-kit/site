@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Code-workshop-kit, the future of remote coding workshops and training."
+    />
+    <title>code-workshop-kit</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <script type="module" src="../components/cwk-nav.js"></script>
+    <style>
+      main {
+        margin: 100px auto;
+        max-width: var(--cwk-content-width);
+        text-align: center;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      a {
+        color: var(--link-color);
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <cwk-nav></cwk-nav>
+    <main>
+      <p>
+        Hi, we were not able to verify your email because either the token is wrong or expired. This
+        happens one month after the email is sent.
+      </p>
+      <p>
+        In the future we will allow you to re-send the verification email. Until then, please
+        contact me on Twitter
+        <a href="https://twitter.com/jorenbroekema" target="_blank" rel="noopener">
+          @jorenbroekema
+        </a>
+      </p>
+    </main>
+  </body>
+</html>

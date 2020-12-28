@@ -91,12 +91,40 @@ export class CwkForm extends LionForm {
     const result = await response.json();
 
     if (response.status === 201) {
-      this.createNotification(`User created, welcome!`, 'success');
+      const emailVerificationSent = await this.sendVerificationEmail(email);
+      if (emailVerificationSent) {
+        this.createNotification(
+          `User created, welcome! We sent an email to verify your account.`,
+          'success',
+        );
+      } else {
+        this.createNotification(
+          `User created, welcome! Sadly, we were not able to send a verification email.`,
+          'warning',
+        );
+      }
       await new Promise((resolve) => setTimeout(resolve, 1500));
       this.login(username, password);
     } else {
       this.createNotification(`Failed to create new user. ${result.data[0]}`, 'error');
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async sendVerificationEmail(email) {
+    const response = await fetch('/api/users/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email }),
+    });
+    const result = await response.json();
+    if (response.status === 200) {
+      return true;
+    }
+    return result.message;
   }
 
   async login(username, password) {
