@@ -17,18 +17,11 @@ h1 {
   display: flex;
 }
 
-.login-signup-buttons button {
+.form-btn {
   width: 100%;
   display: block;
   box-sizing: border-box;
-  text-decoration: none;
-  font-weight: normal;
   margin-top: 5px;
-}
-
-#login-btn,
-#logout-btn,
-#signup-btn {
   font-size: 14px;
   font-family: Roboto Slab, sans-serif;
   font-weight: bold;
@@ -40,42 +33,37 @@ h1 {
   padding: 10px 15px;
 }
 
-#login-btn,
-#logout-btn {
+.form-btn--primary {
   transition: width 0.5s ease-in-out;
   background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
 }
 
-#signup-btn {
+.form-btn--secondary {
   margin-left: 15px;
   background: linear-gradient(0.15turn, var(--cwk-darkest), var(--cwk-dark));
 }
 
-#login-btn:focus,
-#logout-btn:focus {
+.form-btn--primary:focus {
   box-shadow: 0 0 0 2px var(--cwk-darkest);
   outline: none;
 }
 
-#signup-btn:focus {
+.form-btn--secondary:focus {
   box-shadow: 0 0 0 2px var(--cwk-primary-blue);
   outline: none;
 }
 
-#login-btn:hover,
-#logout-btn:hover,
-#signup-btn:hover {
+.form-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: all 0.15s ease;
 }
 
-#login-btn:focus:hover,
-#logout-btn:focus:hover {
+.form-btn--primary:focus:hover {
   box-shadow: 0 0 0 2px var(--cwk-darkest), 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-#signup-btn:focus:hover {
+.form-btn--secondary:focus:hover {
   box-shadow: 0 0 0 2px var(--cwk-primary-blue), 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 

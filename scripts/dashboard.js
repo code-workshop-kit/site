@@ -1,7 +1,7 @@
 import { html, LitElement } from '@lion/core';
 
 import '../components/cwk-nav.js';
-import '../components/cwk-form/cwk-form.js';
+import '../components/cwk-auth-form/cwk-auth-form.js';
 import '../components/cwk-input-user/cwk-input-user.js';
 import '../components/cwk-input-password/cwk-input-password.js';
 import '../components/cwk-input-email/cwk-input-email.js';
@@ -62,7 +62,7 @@ class CwkDashboard extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   signinTemplate() {
     return html`
-      <cwk-form .dashboard=${this} label="Sign in">
+      <cwk-auth-form .dashboard=${this} label="Sign in">
         <form>
           <cwk-input-user autocomplete="username" label="Username" name="username"></cwk-input-user>
           <cwk-input-password
@@ -71,11 +71,11 @@ class CwkDashboard extends LitElement {
             name="password"
           ></cwk-input-password>
           <div class="login-signup-buttons">
-            <button id="login-btn">Login</button>
-            <button type="button" id="signup-btn">Sign up</button>
+            <button class="form-btn form-btn--primary">Login</button>
+            <button class="form-btn form-btn--secondary">Sign up</button>
           </div>
         </form>
-      </cwk-form>
+      </cwk-auth-form>
     `;
   }
 
@@ -83,7 +83,9 @@ class CwkDashboard extends LitElement {
   dashboardTemplate() {
     return html`
       <p>Welcome ${this.user.username}!</p>
-      <button id="logout-btn" @click=${this.logout}>Logout</button>
+      <button class="form-btn form-btn--primary" id="logout-btn" @click=${this.logout}>
+        Logout
+      </button>
     `;
   }
 
