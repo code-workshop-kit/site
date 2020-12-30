@@ -2,7 +2,7 @@ import { css } from '@lion/core';
 import { LionForm } from '@lion/form';
 import { PasswordsMatch } from '../../cwk-input/src/validators.js';
 
-export class CwkForm extends LionForm {
+export class CwkAuthForm extends LionForm {
   static get properties() {
     return {
       dashboard: { attribute: false },
@@ -30,11 +30,11 @@ export class CwkForm extends LionForm {
   }
 
   get loginBtn() {
-    return this.querySelector('#login-btn');
+    return this.querySelector('.form-btn--primary');
   }
 
   get signupBtn() {
-    return this.querySelector('#signup-btn');
+    return this.querySelector('.form-btn--secondary');
   }
 
   constructor() {
