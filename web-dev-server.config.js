@@ -13,7 +13,6 @@ module.exports = {
     wdsReplace({
       values: {
         "'/api/": "'http://localhost:3000/api/",
-        __CWK_RECAPTCHA_CLIENT_KEY__: process.env.CWK_RECAPTCHA_CLIENT_KEY,
       },
       delimiters: ['', ''],
     }),

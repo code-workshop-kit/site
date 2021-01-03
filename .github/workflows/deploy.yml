@@ -17,9 +17,6 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: Create .env file
-        run: 'echo "CWK_RECAPTCHA_CLIENT_KEY=${{ secrets.CWK_RECAPTCHA_CLIENT_KEY }}" >> .env'
-
       - name: Build with Rollup
         run: npm run build
 
