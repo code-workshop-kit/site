@@ -77,7 +77,7 @@ export class CwkAuthForm extends LionForm {
 
   async createUser(username, password, email) {
     // eslint-disable-next-line
-    const token = await grecaptcha.execute('__CWK_RECAPTCHA_CLIENT_KEY__', {
+    const token = await grecaptcha.execute('6Lcn7R4aAAAAAGUmKh5QZRtdSZpdcTgNdKtnJ4pd', {
       action: 'submit',
     });
 
