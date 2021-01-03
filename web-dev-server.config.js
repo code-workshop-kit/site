@@ -1,12 +1,21 @@
+require('dotenv').config();
 const { fromRollup } = require('@web/dev-server-rollup');
-const { rewriteAPIRequestPath } = require('./rollup/rollup-plugins');
+const replace = require('@rollup/plugin-replace');
 
-const wdsRewriteAPIRequestPath = fromRollup(rewriteAPIRequestPath);
+const wdsReplace = fromRollup(replace);
 
 module.exports = {
   open: true,
   watch: true,
   nodeResolve: true,
   appIndex: './pages/index.html',
-  plugins: [wdsRewriteAPIRequestPath()],
+  plugins: [
+    wdsReplace({
+      values: {
+        "'/api/": "'http://localhost:3000/api/",
+        __CWK_RECAPTCHA_CLIENT_KEY__: process.env.CWK_RECAPTCHA_CLIENT_KEY,
+      },
+      delimiters: ['', ''],
+    }),
+  ],
 };

@@ -1,5 +1,5 @@
+const replace = require('@rollup/plugin-replace');
 const baseCfg = require('./rollup.config.js');
-const { rewriteAPIRequestPath } = require('./rollup-plugins.js');
 
 /**
  * Only difference is that for build for development we rewrite requests to /api/ to localhost:3000/api/
@@ -8,5 +8,13 @@ const { rewriteAPIRequestPath } = require('./rollup-plugins.js');
 
 module.exports = {
   ...baseCfg,
-  plugins: [...baseCfg.plugins, rewriteAPIRequestPath()],
+  plugins: [
+    ...baseCfg.plugins,
+    replace({
+      values: {
+        "'/api/": "'http://localhost:3000/api/",
+      },
+      delimiters: ['', ''],
+    }),
+  ],
 };

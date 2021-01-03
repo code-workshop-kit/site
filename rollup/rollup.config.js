@@ -1,6 +1,8 @@
+require('dotenv').config();
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const html = require('@web/rollup-plugin-html').default;
 const copy = require('rollup-plugin-copy');
+const replace = require('@rollup/plugin-replace');
 const dynamicImportVars = require('@rollup/plugin-dynamic-import-vars').default;
 const { importMetaAssets } = require('@web/rollup-plugin-import-meta-assets');
 const { terser } = require('rollup-plugin-terser');
@@ -24,6 +26,12 @@ module.exports = {
     nodeResolve(),
     importMetaAssets(),
     // These assets are not taken care of through importMetaAssets, because they are html src/href attributes
+    replace({
+      values: {
+        __CWK_RECAPTCHA_CLIENT_KEY__: process.env.CWK_RECAPTCHA_CLIENT_KEY,
+      },
+      delimiters: ['', ''],
+    }),
     copy({
       targets: [
         { src: 'assets/images', dest: 'dist/assets' },
