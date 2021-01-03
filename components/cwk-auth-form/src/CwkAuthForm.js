@@ -76,6 +76,11 @@ export class CwkAuthForm extends LionForm {
   }
 
   async createUser(username, password, email) {
+    // eslint-disable-next-line
+    const token = await grecaptcha.execute('__CWK_RECAPTCHA_CLIENT_KEY__', {
+      action: 'submit',
+    });
+
     const response = await fetch('/api/users/create', {
       method: 'POST',
       headers: {
@@ -86,11 +91,12 @@ export class CwkAuthForm extends LionForm {
         username,
         password,
         email,
+        token,
       }),
     });
     const result = await response.json();
 
-    if (response.status === 201) {
+    if (response.status === 201 && result.status !== 'error') {
       this.createNotification(
         `User created, welcome! We sent an email to verify your account.`,
         'success',

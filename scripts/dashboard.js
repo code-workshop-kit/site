@@ -16,6 +16,7 @@ class CwkDashboard extends LitElement {
       authed: { reflect: true },
       user: { attribute: false },
       loading: { attribute: false },
+      backendDown: { attribute: false },
     };
   }
 
@@ -24,6 +25,7 @@ class CwkDashboard extends LitElement {
     this.authed = false;
     this.user = {};
     this.loading = true;
+    this.backendDown = false;
   }
 
   connectedCallback() {
@@ -32,21 +34,26 @@ class CwkDashboard extends LitElement {
   }
 
   async checkAuth() {
-    const response = await fetch('/api/users/current', {
-      credentials: 'include',
-    });
-
-    if (response.status === 200) {
-      const result = await response.json();
-      if (result.status === 'success') {
-        this.user = result.data;
-        this.authed = true;
-      } else {
-        this.user = {};
-        this.authed = false;
+    let response;
+    try {
+      response = await fetch('/api/users/current', {
+        credentials: 'include',
+      });
+      if (response.status === 200) {
+        const result = await response.json();
+        if (result.status === 'success') {
+          this.user = result.data;
+          this.authed = true;
+        } else {
+          this.user = {};
+          this.authed = false;
+        }
       }
+      this.loading = false;
+    } catch (e) {
+      this.loading = false;
+      this.backendDown = true;
     }
-    this.loading = false;
   }
 
   async logout() {
@@ -90,9 +97,12 @@ class CwkDashboard extends LitElement {
   }
 
   render() {
+    // eslint-disable-next-line no-nested-ternary
     return html`${this.loading
       ? ''
-      : html`${this.authed ? this.dashboardTemplate() : this.signinTemplate()}`} `;
+      : this.backendDown
+      ? html`We are experiencing problems. Please try again later.`
+      : html`${this.authed ? this.dashboardTemplate() : this.signinTemplate()}`}`;
   }
 
   createRenderRoot() {
