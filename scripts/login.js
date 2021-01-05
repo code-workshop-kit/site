@@ -1,0 +1,58 @@
+import { html, LitElement } from '@lion/core';
+
+import '../components/cwk-nav.js';
+import '../components/cwk-auth-form/cwk-auth-form.js';
+import '../components/cwk-input-user/cwk-input-user.js';
+import '../components/cwk-input-password/cwk-input-password.js';
+import '../components/cwk-input-email/cwk-input-email.js';
+import '../components/cwk-validation-feedback/cwk-validation-feedback.js';
+import '../components/cwk-notification/cwk-notification.js';
+import '../components/cwk-svg.js';
+import './loadDankMonoFont.js';
+
+class CwkLogin extends LitElement {
+  constructor() {
+    super();
+    this.checkAuth();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async checkAuth() {
+    const response = await fetch('/api/users/current', {
+      credentials: 'include',
+    });
+    if (response.status === 200) {
+      const result = await response.json();
+      if (result.status === 'success') {
+        window.location.href = './dashboard';
+      }
+    }
+  }
+
+  render() {
+    // eslint-disable-next-line no-nested-ternary
+    return html`
+      <cwk-auth-form label="Sign in">
+        <form>
+          <cwk-input-user autocomplete="username" label="Username" name="username"></cwk-input-user>
+          <cwk-input-password
+            autocomplete="current-password"
+            label="Password"
+            name="password"
+          ></cwk-input-password>
+          <div class="login-signup-buttons" style="display: flex">
+            <button class="form-btn form-btn--primary">Login</button>
+            <button class="form-btn form-btn--secondary">Sign up</button>
+          </div>
+        </form>
+      </cwk-auth-form>
+    `;
+  }
+
+  createRenderRoot() {
+    // light dom so that password managers can access the signup/in form..
+    // if dashboard itself needs style encapsulation just create another WC
+    return this;
+  }
+}
+customElements.define('cwk-login', CwkLogin);

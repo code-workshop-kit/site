@@ -8,7 +8,7 @@ module.exports = {
   open: true,
   watch: true,
   nodeResolve: true,
-  appIndex: './pages/index.html',
+  appIndex: 'pages/index.html',
   plugins: [
     wdsReplace({
       values: {
@@ -16,5 +16,14 @@ module.exports = {
       },
       delimiters: ['', ''],
     }),
+  ],
+  middleware: [
+    function rewriteIndex(context, next) {
+      // extensionless routes: append .html
+      if (!context.url.endsWith('/') && context.url.includes('/') && !context.url.includes('.')) {
+        context.url = `${context.url}.html`;
+      }
+      return next();
+    },
   ],
 };

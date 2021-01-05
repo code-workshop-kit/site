@@ -3,12 +3,6 @@ import { LionForm } from '@lion/form';
 import { PasswordsMatch } from '../../cwk-input/src/validators.js';
 
 export class CwkAuthForm extends LionForm {
-  static get properties() {
-    return {
-      dashboard: { attribute: false },
-    };
-  }
-
   static get styles() {
     return [
       super.styles,
@@ -39,7 +33,6 @@ export class CwkAuthForm extends LionForm {
 
   constructor() {
     super();
-    this.dashboard = {};
     this.isCreatingAccount = false;
     this.loginBtn.addEventListener('click', this.loginHandler.bind(this));
     this.signupBtn.addEventListener('click', this.signupHandler.bind(this));
@@ -97,12 +90,10 @@ export class CwkAuthForm extends LionForm {
     const result = await response.json();
 
     if (response.status === 201 && result.status !== 'error') {
-      this.createNotification(
-        `User created, welcome! We sent an email to verify your account.`,
-        'success',
-      );
+      this.createNotification(`Created. We sent an email to verify your account.`, 'success');
+      this.disabled = true;
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      this.login(username, password);
+      window.location.reload();
     } else {
       this.createNotification(`Failed to create new user. ${result.data[0]}`, 'error');
     }
@@ -121,10 +112,11 @@ export class CwkAuthForm extends LionForm {
       }),
     });
 
-    if (response.status === 200) {
-      this.dashboard.checkAuth();
-    } else {
-      this.createNotification('Wrong username or password.', 'error');
+    if (response.status === 401) {
+      const result = await response.json();
+      this.createNotification(result.message, 'error');
+    } else if (response.status === 200) {
+      window.location.href = './dashboard';
     }
   }
 
