@@ -1,5 +1,7 @@
 import { html, css, LitElement } from '@lion/core';
 
+import '../../cwk-svg.js';
+
 export class CwkNotification extends LitElement {
   static get properties() {
     return {

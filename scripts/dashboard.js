@@ -1,6 +1,6 @@
 import { LitElement, html, css } from '@lion/core';
 
-import './cwk-nav.js';
+import '../components/cwk-nav.js';
 
 export class CwkDashboard extends LitElement {
   static get styles() {

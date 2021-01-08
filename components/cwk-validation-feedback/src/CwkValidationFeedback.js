@@ -1,6 +1,8 @@
 import { LionValidationFeedback } from '@lion/form-core';
 import { html, css } from '@lion/core';
 
+import '../../cwk-svg.js';
+
 export class CwkValidationFeedback extends LionValidationFeedback {
   static get styles() {
     return [

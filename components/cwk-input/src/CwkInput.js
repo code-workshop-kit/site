@@ -1,7 +1,10 @@
 import { LionInput } from '@lion/input';
+import { LocalizeMixin } from '@lion/localize';
 import { css } from '@lion/core';
 
-export class CwkInput extends LionInput {
+import '../../cwk-validation-feedback/cwk-validation-feedback.js';
+
+export class CwkInput extends LocalizeMixin(LionInput) {
   static get localizeNamespaces() {
     return [
       ...super.localizeNamespaces,
