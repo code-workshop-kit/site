@@ -1,23 +1,13 @@
 import { CwkBaseForm } from './CwkBaseForm.js';
-import { PasswordsMatch } from '../../cwk-input-password/src/validators.js';
+import { applyPasswordMatchValidator } from '../../cwk-input-password/src/applyPasswordMatchValidator.js';
 
 export class CwkResetPasswordForm extends CwkBaseForm {
   connectedCallback() {
     super.connectedCallback();
-    const initialPasswordInput = this.querySelector('[name=password]');
-    const confirmPasswordInput = this.querySelector('[name=confirm-password]');
-    confirmPasswordInput.validators.push(
-      new PasswordsMatch({ first: initialPasswordInput, second: confirmPasswordInput }),
+    applyPasswordMatchValidator(
+      this.querySelector('[name=password]'),
+      this.querySelector('[name=confirm-password]'),
     );
-    confirmPasswordInput.addEventListener('showsFeedbackForErrorChanged', () => {
-      initialPasswordInput.validators.push(
-        new PasswordsMatch({ first: confirmPasswordInput, second: initialPasswordInput }),
-      );
-      // When user triggers confirm pw validation, we should consider initial as prefilled so that validation
-      // and feedback happens on both inputs.
-      initialPasswordInput.prefilled = true;
-      initialPasswordInput.validate();
-    });
   }
 
   async submitHandler(ev) {
