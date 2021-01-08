@@ -1,5 +1,5 @@
 import { CwkBaseForm } from './CwkBaseForm.js';
-import { PasswordsMatch } from '../../cwk-input-password/src/validators.js';
+import { applyPasswordMatchValidator } from '../../cwk-input-password/src/applyPasswordMatchValidator.js';
 
 import '../../cwk-input-email/cwk-input-email.js';
 import '../../cwk-input-password/cwk-input-password.js';
@@ -169,25 +169,14 @@ export class CwkAuthForm extends CwkBaseForm {
     this.submitBtn.innerText = 'Create Account';
 
     // Add confirm password with match validation
+    const initialPasswordInput = this.querySelector('[name=password]');
+    initialPasswordInput.autocomplete = 'new-password';
     const confirmPasswordInput = document.createElement('cwk-input-password');
     confirmPasswordInput.creating = true;
     confirmPasswordInput.label = 'Confirm Password';
     confirmPasswordInput.name = 'password-confirm';
-    const initialPasswordInput = this.querySelector('[name=password]');
-    confirmPasswordInput.validators.push(
-      new PasswordsMatch({ first: initialPasswordInput, second: confirmPasswordInput }),
-    );
-    confirmPasswordInput.addEventListener('showsFeedbackForErrorChanged', () => {
-      initialPasswordInput.validators.push(
-        new PasswordsMatch({ first: confirmPasswordInput, second: initialPasswordInput }),
-      );
-      // When user triggers confirm pw validation, we should consider initial as prefilled so that validation
-      // and feedback happens on both inputs.
-      initialPasswordInput.prefilled = true;
-      initialPasswordInput.validate();
-    });
-    initialPasswordInput.autocomplete = 'new-password';
     confirmPasswordInput.autocomplete = 'new-password';
+    applyPasswordMatchValidator(initialPasswordInput, confirmPasswordInput);
     this.querySelector('.login-signup-buttons').insertAdjacentElement(
       'beforebegin',
       confirmPasswordInput,
