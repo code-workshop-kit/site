@@ -1,14 +1,10 @@
 import { html, LitElement } from '@lion/core';
 
+import './loadDankMonoFont.js';
 import '../components/cwk-nav.js';
-import '../components/cwk-auth-form/cwk-auth-form.js';
+import '../components/cwk-form/cwk-auth-form.js';
 import '../components/cwk-input-user/cwk-input-user.js';
 import '../components/cwk-input-password/cwk-input-password.js';
-import '../components/cwk-input-email/cwk-input-email.js';
-import '../components/cwk-validation-feedback/cwk-validation-feedback.js';
-import '../components/cwk-notification/cwk-notification.js';
-import '../components/cwk-svg.js';
-import './loadDankMonoFont.js';
 
 class CwkLogin extends LitElement {
   constructor() {
@@ -40,6 +36,7 @@ class CwkLogin extends LitElement {
             label="Password"
             name="password"
           ></cwk-input-password>
+          <a href="#" class="forgot-password">Forgot credentials?</a>
           <div class="login-signup-buttons" style="display: flex">
             <button class="form-btn form-btn--primary">Login</button>
             <button class="form-btn form-btn--secondary">Sign up</button>

@@ -1,8 +1,7 @@
-import { LocalizeMixin } from '@lion/localize';
 import { CwkInput } from '../../cwk-input/src/CwkInput.js';
 import { MinMaxLength, IllegalPattern, Required } from '../../cwk-input/src/validators.js';
 
-export class CwkInputPassword extends LocalizeMixin(CwkInput) {
+export class CwkInputPassword extends CwkInput {
   static get properties() {
     return {
       creating: { attribute: false },

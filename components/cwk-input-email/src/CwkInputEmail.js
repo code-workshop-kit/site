@@ -1,6 +1,7 @@
 import { LocalizeMixin } from '@lion/localize';
 import { CwkInput } from '../../cwk-input/src/CwkInput.js';
-import { Required, IsEmail } from '../../cwk-input/src/validators.js';
+import { Required } from '../../cwk-input/src/validators.js';
+import { IsEmail } from './validators.js';
 
 export class CwkInputEmail extends LocalizeMixin(CwkInput) {
   constructor() {

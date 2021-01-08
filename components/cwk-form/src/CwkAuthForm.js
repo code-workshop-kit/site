@@ -1,58 +1,52 @@
-import { css } from '@lion/core';
-import { LionForm } from '@lion/form';
-import { PasswordsMatch } from '../../cwk-input/src/validators.js';
+import { CwkBaseForm } from './CwkBaseForm.js';
+import { PasswordsMatch } from '../../cwk-input-password/src/validators.js';
 
-export class CwkAuthForm extends LionForm {
-  static get styles() {
-    return [
-      super.styles,
-      css`
-        :host {
-          width: 270px;
-        }
+import '../../cwk-input-email/cwk-input-email.js';
+import '../../cwk-input-password/cwk-input-password.js';
 
-        .form-field__label {
-          font-family: Roboto Slab, sans-serif;
-          font-weight: bold;
-          font-size: 35px;
-          margin-bottom: 20px;
-          margin-top: 75px;
-          text-align: center;
-        }
-      `,
-    ];
-  }
-
-  get loginBtn() {
-    return this.querySelector('.form-btn--primary');
-  }
-
+export class CwkAuthForm extends CwkBaseForm {
   get signupBtn() {
     return this.querySelector('.form-btn--secondary');
   }
 
-  constructor() {
-    super();
-    this.isCreatingAccount = false;
-    this.loginBtn.addEventListener('click', this.loginHandler.bind(this));
-    this.signupBtn.addEventListener('click', this.signupHandler.bind(this));
+  get forgotPasswordEl() {
+    return this.querySelector('.forgot-password');
   }
 
-  async loginHandler() {
-    this.clearNotification();
+  constructor() {
+    super();
+    this.mode = 'login';
+    this.signupBtn.addEventListener('click', this.signupHandler.bind(this));
+    this.forgotPasswordEl.addEventListener('click', this.forgotPasswordHandler.bind(this));
+  }
+
+  async submitHandler(ev) {
+    super.submitHandler(ev);
     if (this.hasFeedbackFor.includes('error')) {
       this.focusFirstFieldWithError();
       return;
     }
 
-    const username = this.formElements.username.serializedValue;
-    const password = this.formElements.password.serializedValue;
-
-    if (this.isCreatingAccount) {
-      const email = this.formElements.email.serializedValue;
-      this.createUser(username, password, email);
-    } else {
-      this.login(username, password);
+    switch (this.mode) {
+      case 'signup': {
+        const username = this.formElements.username.serializedValue;
+        const password = this.formElements.password.serializedValue;
+        const email = this.formElements.email.serializedValue;
+        this.createUser(username, password, email);
+        break;
+      }
+      case 'login': {
+        const username = this.formElements.username.serializedValue;
+        const password = this.formElements.password.serializedValue;
+        this.login(username, password);
+        break;
+      }
+      case 'forgot-password': {
+        const email = this.formElements.email.serializedValue;
+        this.forgotPassword(email);
+        break;
+      }
+      // no default
     }
   }
 
@@ -63,9 +57,14 @@ export class CwkAuthForm extends LionForm {
       return;
     }
 
-    if (!this.isCreatingAccount) {
+    if (this.mode === 'login') {
       this.transformFormToSignup();
     }
+  }
+
+  forgotPasswordHandler() {
+    this.clearNotification();
+    this.transformFormToForgotPassword();
   }
 
   async createUser(username, password, email) {
@@ -120,32 +119,54 @@ export class CwkAuthForm extends LionForm {
     }
   }
 
-  createNotification(msg, type) {
-    const notification = document.createElement('cwk-notification');
-    notification.type = type;
-    notification.msg = msg;
-    this.querySelector('.login-signup-buttons').insertAdjacentElement('beforebegin', notification);
-  }
-
-  clearNotification() {
-    const notification = this.querySelector('cwk-notification');
-    if (notification) {
-      notification.remove();
+  async forgotPassword(email) {
+    const response = await fetch('/api/users/forgot-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+      }),
+    });
+    const result = await response.json();
+    if (response.status === 200) {
+      this.createNotification(result.message, 'success');
+      this.disabled = true;
+      return;
     }
+    this.createNotification(
+      'There was a problem sending you a password reset link. Try again later.',
+      'error',
+    );
   }
 
-  focusFirstFieldWithError() {
-    this.formElements.filter((elem) => elem.hasFeedbackFor.includes('error'))[0]._inputNode.focus();
+  transformFormToForgotPassword() {
+    this.mode = 'forgot-password';
+    this.label = 'Forgot Credentials';
+    this.helpText =
+      "We'll send you an email with your username and a link to change your password.";
+    this.signupBtn.remove();
+    this.submitBtn.innerText = 'Request password reset';
+    this.formElements.username.remove();
+    this.formElements.password.remove();
+    const emailField = document.createElement('cwk-input-email');
+    emailField.name = 'email';
+    emailField.label = 'E-Mail Address';
+    this._formNode.prepend(emailField);
+    this.forgotPasswordEl.remove();
   }
 
   transformFormToSignup() {
-    // Change current foorm
-    this.isCreatingAccount = true;
+    // Change current form
+    this.mode = 'signup';
     this.label = 'Sign up';
     this.signupBtn.remove();
+    this.forgotPasswordEl.remove();
     this.formElements.username.creating = true;
     this.formElements.password.creating = true;
-    this.loginBtn.innerText = 'Create Account';
+    this.submitBtn.innerText = 'Create Account';
 
     // Add confirm password with match validation
     const confirmPasswordInput = document.createElement('cwk-input-password');
