@@ -5,7 +5,7 @@ import { MinMaxLength, IllegalPattern, Required } from '../../cwk-input/src/vali
 export class CwkInputUser extends LocalizeMixin(CwkInput) {
   static get properties() {
     return {
-      creating: { attribute: false },
+      creating: { type: Boolean, reflect: true },
     };
   }
 

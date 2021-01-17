@@ -1,3 +1,11 @@
+cwk-auth-form {
+  margin-bottom: 40px;
+}
+
+.login-signup-buttons {
+  display: flex;
+}
+
 .form-btn {
   width: 100%;
   display: block;
@@ -52,7 +60,33 @@
   display: block;
   width: max-content;
   font-size: 12px;
-  margin-top: -8px;
-  margin-bottom: 5px;
+  margin-top: -4px;
+  padding-top: 4px;
+  padding-bottom: 10px;
   color: var(--link-color);
+}
+
+.form-btn--github {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  color: var(--cwk-darker);
+  background-color: var(--cwk-lightest);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid var(--cwk-darker);
+}
+
+.form-btn--github cwk-svg svg {
+  display: block;
+  width: 20px;
+}
+
+.form-btn--github div {
+  flex-grow: 1;
+  margin-right: -5px;
 }

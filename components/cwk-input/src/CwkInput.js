@@ -43,6 +43,10 @@ export class CwkInput extends LocalizeMixin(LionInput) {
           font-family: Roboto, sans-serif;
         }
 
+        .input-group__container > .input-group__input ::slotted(.form-control:focus) {
+          box-shadow: 0 0 0px 2px var(--cwk-primary-blue);
+        }
+
         :host([shows-feedback-for='error'])
           .input-group__container
           > .input-group__input

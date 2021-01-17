@@ -77,9 +77,11 @@ body.dark {
 @media (prefers-color-scheme: dark) {
   body {
     --text-color: var(--cwk-light);
+    --link-color: var(--cwk-lighter-blue);
     --nav-color: var(--cwk-darker);
     --nav-text-color: var(--cwk-light);
     --body-background-color: var(--cwk-dark);
+    --error-color: var(--cwk-secondary-red);
   }
 }
 
