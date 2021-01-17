@@ -72,7 +72,6 @@ export class CwkDashboard extends LitElement {
       });
       if (response.status === 200) {
         const result = await response.json();
-        console.log(result);
         if (result.status === 'success') {
           this.user = result.data;
           if (!this.user.username) {
