@@ -72,8 +72,12 @@ export class CwkDashboard extends LitElement {
       });
       if (response.status === 200) {
         const result = await response.json();
+        console.log(result);
         if (result.status === 'success') {
           this.user = result.data;
+          if (!this.user.username) {
+            window.location.href = './set-username';
+          }
         } else {
           window.location.href = './login';
         }
@@ -87,7 +91,7 @@ export class CwkDashboard extends LitElement {
 
   // eslint-disable-next-line class-methods-use-this
   async logout() {
-    await fetch('/api/users/logout', { credentials: 'include' });
+    await fetch('/api/auth/logout', { credentials: 'include' });
     window.location.href = './login';
   }
 

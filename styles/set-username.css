@@ -1,0 +1,35 @@
+.form-btn {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-top: 5px;
+  font-size: 14px;
+  font-family: Roboto Slab, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  color: var(--cwk-lightest);
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+.form-btn--primary {
+  transition: width 0.5s ease-in-out;
+  background: linear-gradient(0.15turn, var(--cwk-secondary-blue), var(--cwk-primary-blue));
+}
+
+.form-btn--primary:focus {
+  box-shadow: 0 0 0 2px var(--cwk-darkest);
+  outline: none;
+}
+
+.form-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+}
+
+.form-btn--primary:focus:hover {
+  box-shadow: 0 0 0 2px var(--cwk-darkest), 0 4px 12px rgba(0, 0, 0, 0.5);
+}

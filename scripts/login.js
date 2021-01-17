@@ -1,6 +1,7 @@
 import { html, LitElement } from '@lion/core';
 
 import './loadDankMonoFont.js';
+import '../components/cwk-svg.js';
 import '../components/cwk-nav.js';
 import '../components/cwk-form/cwk-auth-form.js';
 import '../components/cwk-input-user/cwk-input-user.js';
@@ -25,6 +26,11 @@ class CwkLogin extends LitElement {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  async githubAuth() {
+    window.location.href = '/api/auth/github';
+  }
+
   render() {
     // eslint-disable-next-line no-nested-ternary
     return html`
@@ -43,6 +49,10 @@ class CwkLogin extends LitElement {
           </div>
         </form>
       </cwk-auth-form>
+      <button @click=${this.githubAuth} class="form-btn form-btn--github">
+        <cwk-svg svg-id="github"></cwk-svg>
+        <div>Sign in with GitHub</div>
+      </button>
     `;
   }
 

@@ -25,5 +25,16 @@ module.exports = {
       }
       return next();
     },
+    // try to find html files inside /pages/. This could happen if the backend tries to do a redirect for us, e.g. for github auth
+    function rewriteIndex(context, next) {
+      if (
+        context.status === 404 &&
+        context.url.endsWith('.html') &&
+        !context.url.startsWith('/pages/')
+      ) {
+        context.redirect(`/pages${context.url}`);
+      }
+      return next();
+    },
   ],
 };
