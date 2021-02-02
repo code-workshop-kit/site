@@ -1,5 +1,5 @@
 import { html, LitElement } from '@lion/core';
-
+import { checkAuth } from './checkAuth.js';
 import './loadDankMonoFont.js';
 import '../components/cwk-svg.js';
 import '../components/cwk-nav.js';
@@ -10,20 +10,11 @@ import '../components/cwk-input-password/cwk-input-password.js';
 class CwkLogin extends LitElement {
   constructor() {
     super();
-    this.checkAuth();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async checkAuth() {
-    const response = await fetch('/api/users/current', {
-      credentials: 'include',
-    });
-    if (response.status === 200) {
-      const result = await response.json();
-      if (result.status === 'success') {
+    checkAuth().then((user) => {
+      if (user) {
         window.location.href = './dashboard';
       }
-    }
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this

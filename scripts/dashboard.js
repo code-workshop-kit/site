@@ -1,5 +1,5 @@
 import { LitElement, html, css } from '@lion/core';
-
+import { checkAuth } from './checkAuth.js';
 import '../components/cwk-nav.js';
 
 export class CwkDashboard extends LitElement {
@@ -61,31 +61,17 @@ export class CwkDashboard extends LitElement {
     super();
     this.loading = true;
     this.backendDown = false;
-    this.checkAuth();
-  }
-
-  async checkAuth() {
-    let response;
-    try {
-      response = await fetch('/api/users/current', {
-        credentials: 'include',
+    this.user = checkAuth();
+    checkAuth()
+      .then((user) => {
+        this.user = user;
+      })
+      .catch(() => {
+        this.backendDown = true;
+      })
+      .finally(() => {
+        this.loading = false;
       });
-      if (response.status === 200) {
-        const result = await response.json();
-        if (result.status === 'success') {
-          this.user = result.data;
-          if (!this.user.username) {
-            window.location.href = './set-username';
-          }
-        } else {
-          window.location.href = './login';
-        }
-      }
-      this.loading = false;
-    } catch (e) {
-      this.loading = false;
-      this.backendDown = true;
-    }
   }
 
   // eslint-disable-next-line class-methods-use-this
