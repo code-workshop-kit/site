@@ -1,4 +1,7 @@
-require('dotenv').config();
+import { createRequire } from 'module';
+import initialThemeScript from '../scripts/initial-theme-script.js';
+
+const require = createRequire(import.meta.url);
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const html = require('@web/rollup-plugin-html').default;
 const copy = require('rollup-plugin-copy');
@@ -7,7 +10,7 @@ const { importMetaAssets } = require('@web/rollup-plugin-import-meta-assets');
 const { terser } = require('rollup-plugin-terser');
 const csso = require('csso');
 
-module.exports = {
+export default {
   input: './pages/*.html',
   output: { dir: 'dist' },
   plugins: [
@@ -26,13 +29,7 @@ module.exports = {
           _html.replace(
             '</head>',
             `
-              <script>
-                // Initial setup before first render to prevent FART
-                // Priority is: 1) saved preference 2) browser/os preference 3) default 'light'
-                const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = localStorage.getItem('cwk-theme') || (userPrefersDark ? 'dark' : 'light');
-                document.documentElement.classList.add(theme);
-              </script>
+              ${initialThemeScript}
               </head>
             `,
           ),

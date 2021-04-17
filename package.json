@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "web-dev-server",
     "build": "rimraf dist && rollup -c rollup/rollup.config.js",
