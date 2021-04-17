@@ -442,10 +442,6 @@ section:first-child {
   margin-bottom: 10px;
 }
 
-#selling-points-section p {
-  margin: 0;
-}
-
 #selling-points-section p > a {
   color: var(--link-color);
   font-weight: normal;
@@ -467,4 +463,18 @@ section:first-child {
   #selling-points-section {
     column-gap: 150px;
   }
+}
+
+/*
+ *                            *
+ *                            *
+ *                            *
+ *           FOOTER           *
+ *                            *
+ *                            *
+ *                            *
+ *                            */
+/* temp 1px for now */
+footer {
+  height: 1px;
 }
