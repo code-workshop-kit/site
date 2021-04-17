@@ -7,7 +7,7 @@
     "start": "web-dev-server",
     "build": "rimraf dist && rollup -c rollup/rollup.config.js",
     "build:dev": "rimraf dist && rollup -c rollup/rollup-dev.config.js",
-    "start:prod": "cd dist && http-server -c-1 -o -p 8000",
+    "build:serve": "cd dist && http-server -a localhost -c-1 -o -p 8000",
     "format": "npm run format:eslint && npm run format:prettier",
     "format:eslint": "eslint --ext .js,.html . --fix",
     "format:prettier": "prettier \"**/*.{js,md}\" --write",

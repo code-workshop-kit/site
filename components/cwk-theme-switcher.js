@@ -8,9 +8,9 @@ class CwkThemeSwitcher extends HTMLElement {
   // but not when the user changes their OS/browser settings
   set theme(value) {
     if (value === 'light') {
-      document.body.classList.replace('dark', 'light');
+      document.documentElement.classList.replace('dark', 'light');
     } else {
-      document.body.classList.replace('light', 'dark');
+      document.documentElement.classList.replace('light', 'dark');
     }
     this.setAttribute('theme', value);
   }
@@ -33,6 +33,7 @@ class CwkThemeSwitcher extends HTMLElement {
 
   setup() {
     this.setupInitialTheme();
+
     this.setAttribute('tabindex', 0);
     this.setAttribute('aria-label', 'Site theme toggler, dark and light');
 
@@ -55,10 +56,6 @@ class CwkThemeSwitcher extends HTMLElement {
       this.theme = 'light';
     }
 
-    // Insert transition styles after adding the theme class,
-    // so the initial theme setting does not get a CSS transition
-    document.body.classList.add(this.theme);
-
     // Respond to user preference changes on OS and Browser
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev) => {
       if (ev.matches) {
@@ -68,6 +65,7 @@ class CwkThemeSwitcher extends HTMLElement {
       }
     });
 
+    // Delay this by animation frame so it is not transitioning things on initial render
     requestAnimationFrame(() => {
       document.body.style.setProperty(
         '--cwk-background-transition',
