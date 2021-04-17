@@ -1,10 +1,13 @@
-require('dotenv').config();
+import { createRequire } from 'module';
+import initialThemeScript from './scripts/initial-theme-script.js';
+
+const require = createRequire(import.meta.url);
 const { fromRollup } = require('@web/dev-server-rollup');
 const replace = require('@rollup/plugin-replace');
 
 const wdsReplace = fromRollup(replace);
 
-module.exports = {
+export default {
   open: true,
   watch: true,
   nodeResolve: true,
@@ -16,6 +19,22 @@ module.exports = {
       },
       delimiters: ['', ''],
     }),
+    {
+      name: 'insert-theme-init-script',
+      transform(context) {
+        let transformedBody = context.body;
+        if (context.response.is('html')) {
+          transformedBody = context.body.replace(
+            '</head>',
+            `
+            ${initialThemeScript}
+            </head>
+          `,
+          );
+        }
+        return transformedBody;
+      },
+    },
   ],
   middleware: [
     function rewriteIndex(context, next) {

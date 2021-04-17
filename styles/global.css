@@ -2,7 +2,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: local(''), url('../assets/fonts/roboto-v20-latin-regular.woff2') format('woff2'),
     url('../assets/fonts/roboto-v20-latin-regular.woff') format('woff');
 }
@@ -11,7 +11,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  font-display: swap;
+  font-display: block;
   src: local(''), url('../assets/fonts/roboto-v20-latin-300.woff2') format('woff2'),
     url('../assets/fonts/roboto-v20-latin-300.woff') format('woff');
 }
@@ -20,7 +20,7 @@
   font-family: 'Roboto Slab';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: local(''), url('../assets/fonts/roboto-slab-v12-latin-regular.woff2') format('woff2'),
     url('../assets/fonts/roboto-slab-v12-latin-regular.woff') format('woff');
 }
@@ -29,7 +29,7 @@
   font-family: 'Roboto Slab';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
   src: local(''), url('../assets/fonts/roboto-slab-v12-latin-700.woff2') format('woff2'),
     url('../assets/fonts/roboto-slab-v12-latin-700.woff') format('woff');
 }
@@ -56,7 +56,7 @@
   --cwk-fill-transition: 'none';
 }
 
-body.light {
+html.light {
   --text-color: var(--cwk-dark);
   --link-color: var(--cwk-secondary-blue);
   --nav-color: var(--cwk-dark);
@@ -65,7 +65,7 @@ body.light {
   --error-color: var(--cwk-primary-red);
 }
 
-body.dark {
+html.dark {
   --text-color: var(--cwk-light);
   --link-color: var(--cwk-lighter-blue);
   --nav-color: var(--cwk-darker);
@@ -75,7 +75,7 @@ body.dark {
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
+  html {
     --text-color: var(--cwk-light);
     --link-color: var(--cwk-lighter-blue);
     --nav-color: var(--cwk-darker);
@@ -87,6 +87,7 @@ body.dark {
 
 html,
 body {
+  height: 100%;
   padding: 0;
   margin: 0;
   color: var(--text-color);
