@@ -7,22 +7,46 @@ class CwkThemeSwitcher extends HTMLElement {
   // to set it for explicit user actions on the toggler
   // but not when the user changes their OS/browser settings
   set theme(value) {
-    if (value === 'light') {
-      document.documentElement.classList.replace('dark', 'light');
-    } else {
-      document.documentElement.classList.replace('light', 'dark');
-    }
     this.setAttribute('theme', value);
   }
 
   toggle() {
-    const newVal = this.theme === 'light' ? 'dark' : 'light';
-    localStorage.setItem('cwk-theme', newVal);
-    this.theme = newVal;
+    if (document.documentElement.getAttribute('theme') === 'light') {
+      this.setTheme('dark', true);
+    } else {
+      this.setTheme('light', true);
+    }
+  }
+
+  setTheme(theme, store = false) {
+    this.theme = theme;
+    document.documentElement.setAttribute('theme', theme);
+    if (store) {
+      localStorage.setItem('cwk-theme', theme);
+    }
   }
 
   constructor() {
     super();
+    this.boundKeyDown = this.keyDown.bind(this);
+    this.boundToggle = this.toggle.bind(this);
+
+    const themeObserver = new MutationObserver((list) => {
+      for (const mutation of list) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'theme' &&
+          document.documentElement.getAttribute('theme') !== this.theme &&
+          document.documentElement.getAttribute('theme') !== undefined &&
+          this.theme !== undefined
+        ) {
+          // update internal theme prop based on another theme toggler changing the theme
+          this.theme = document.documentElement.getAttribute('theme');
+        }
+      }
+    });
+    themeObserver.observe(document.documentElement, { attributes: true });
+
     this.attachShadow({ mode: 'open' });
   }
 
@@ -31,37 +55,33 @@ class CwkThemeSwitcher extends HTMLElement {
     this.setup();
   }
 
+  disconnectedCallback() {
+    this.removeEventListener('keydown', this.boundKeyDown);
+    this.removeEventListener('click', this.boundToggle);
+  }
+
   setup() {
     this.setupInitialTheme();
 
     this.setAttribute('tabindex', 0);
     this.setAttribute('aria-label', 'Site theme toggler, dark and light');
 
-    const boundKeyDown = this.keyDown.bind(this);
-    this.addEventListener('keydown', boundKeyDown);
-
-    const boundToggle = this.toggle.bind(this);
-    this.addEventListener('click', boundToggle);
+    this.addEventListener('keydown', this.boundKeyDown);
+    this.addEventListener('click', this.boundToggle);
   }
 
   setupInitialTheme() {
     const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     // Prio is: 1) saved preference 2) browser/os preference 3) default 'light'
-    if (localStorage.getItem('cwk-theme')) {
-      this.theme = localStorage.getItem('cwk-theme');
-    } else if (userPrefersDark) {
-      this.theme = 'dark';
-    } else {
-      this.theme = 'light';
-    }
+    this.theme = localStorage.getItem('cwk-theme') || (userPrefersDark ? 'dark' : 'light');
 
     // Respond to user preference changes on OS and Browser
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev) => {
       if (ev.matches) {
-        this.theme = 'dark';
+        this.setTheme('dark');
       } else {
-        this.theme = 'light';
+        this.setTheme('light');
       }
     });
 
@@ -85,14 +105,12 @@ class CwkThemeSwitcher extends HTMLElement {
       case 'ArrowLeft':
       case 'ArrowUp':
         ev.preventDefault();
-        this.theme = 'dark';
-        localStorage.setItem('cwk-theme', 'dark');
+        this.setTheme('dark', true);
         break;
       case 'ArrowRight':
       case 'ArrowDown':
         ev.preventDefault();
-        this.theme = 'light';
-        localStorage.setItem('cwk-theme', 'light');
+        this.setTheme('light', true);
         break;
       /* no default */
     }
@@ -107,8 +125,12 @@ class CwkThemeSwitcher extends HTMLElement {
 
         :host(:focus) {
           outline: none;
-          box-shadow: 0 0 0 2px var(--cwk-lighter-blue);
+
           border-radius: 12px;
+        }
+
+        :host(:focus) .container {
+          border: 2px solid var(--cwk-lighter-blue);
         }
 
         .container {
@@ -117,6 +139,7 @@ class CwkThemeSwitcher extends HTMLElement {
           overflow: hidden;
           border-radius: 12.5px;
           padding: 4px;
+          border: 2px solid var(--cwk-darker);
           background-color: var(--cwk-lightest);
         }
 

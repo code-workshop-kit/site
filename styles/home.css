@@ -1,4 +1,4 @@
-html.light {
+html[theme='light'] {
   --signup-text-color: var(--cwk-lightest);
   --signup-radial-inner: #5d646b;
   --signup-radial-outer: var(--cwk-dark);
@@ -6,7 +6,7 @@ html.light {
   --cwk-hex-fill: var(--cwk-lightest);
 }
 
-html.dark {
+html[theme='dark'] {
   --signup-text-color: var(--cwk-light);
   --signup-radial-inner: #43484e;
   --signup-radial-outer: var(--cwk-darker);
@@ -36,6 +36,7 @@ html.dark {
 
 main {
   margin: 0 auto;
+  padding-top: 75px;
   max-width: var(--cwk-full-width);
 }
 
@@ -44,7 +45,6 @@ h1 {
   font-weight: bold;
   font-size: 26px; /* 50px */
   margin-bottom: 6px;
-  margin-top: 75px;
 }
 
 h2 {

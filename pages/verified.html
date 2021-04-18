@@ -9,9 +9,10 @@
     />
     <title>code-workshop-kit</title>
     <link rel="stylesheet" href="../styles/global.css" />
-    <script type="module" src="../components/cwk-nav.js"></script>
+    <script type="module" src="../scripts/verified.js"></script>
     <style>
       main {
+        padding: 0 50px;
         margin: 100px auto;
         max-width: var(--cwk-content-width);
         text-align: center;
@@ -24,6 +25,9 @@
   </head>
   <body>
     <cwk-nav></cwk-nav>
+    <cwk-drawer id="sidebar">
+      <cwk-sidebar slot="content" id="sidebar-nav"></cwk-sidebar>
+    </cwk-drawer>
     <main>
       <p>Hi, your email has been successfully verified!</p>
     </main>
