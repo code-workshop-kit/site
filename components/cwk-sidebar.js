@@ -85,7 +85,13 @@ class CwkSidebar extends HTMLElement {
             DOCS
           </a>
         </div>
-        <div class="sidebar-item github-nav-logo">
+        <div class="sidebar-item">
+          <a aria-label="Slack Workspace" href="https://join.slack.com/t/code-workshop-kit/shared_invite/zt-p9pfhqzo-tvj_5sWNuxHYT_TJw3t5_g">
+            <cwk-svg svg-id="slack"></cwk-svg>
+            SLACK
+          </a>
+        </div>
+        <div class="sidebar-item">
           <a aria-label="GitHub page" href="https://github.com/code-workshop-kit/code-workshop-kit">
             <cwk-svg svg-id="github"></cwk-svg>
             GITHUB

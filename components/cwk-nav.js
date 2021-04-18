@@ -5,7 +5,6 @@ import './cwk-drawer/cwk-drawer.js';
 class CwkNav extends HTMLElement {
   constructor() {
     super();
-    this.hamburgerMenuShown = false;
     this.attachShadow({ mode: 'open' });
   }
 
@@ -87,22 +86,22 @@ class CwkNav extends HTMLElement {
           flex-grow: 1;
         }
 
-        .github-nav-logo {
+        .socials {
+          display: flex;
+        }
+
+        .socials a {
           width: 25px;
         }
 
-        .github-nav-logo svg {
-          vertical-align: middle;
+        .socials a:not(:first-child) {
+          padding-left: 20px;
         }
 
-        .mobile-menu {
-          transform: translateX(-100%);
-          transition: transform 0.2s ease-in-out;
-          width: 70%;
-          height: 100vh;
-          z-index: 1;
-          position: absolute;
-          background-color: #ddd;
+        .socials svg {
+          vertical-align: middle;
+          display: block;
+          fill: var(--nav-text-color)
         }
 
         @media (min-width: 600px) {
@@ -132,7 +131,10 @@ class CwkNav extends HTMLElement {
               >DOCS</a
             >
           </div>
-          <div class="github-nav-logo">
+          <div class="socials">
+            <a aria-label="Slack Workspace" href="https://join.slack.com/t/code-workshop-kit/shared_invite/zt-p9pfhqzo-tvj_5sWNuxHYT_TJw3t5_g"
+              ><cwk-svg svg-id="slack"></cwk-svg>
+            </a>
             <a aria-label="GitHub page" href="https://github.com/code-workshop-kit/code-workshop-kit"
               ><cwk-svg svg-id="github"></cwk-svg>
             </a>
