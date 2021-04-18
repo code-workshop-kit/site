@@ -1,6 +1,4 @@
 import './loadDankMonoFont.js';
-import '../components/cwk-svg.js';
-import '../components/cwk-nav.js';
 
 const setupCopyBtn = () => {
   let copyTimeout;

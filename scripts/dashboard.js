@@ -1,6 +1,5 @@
 import { LitElement, html, css } from '@lion/core';
 import { checkAuth } from './checkAuth.js';
-import '../components/cwk-nav.js';
 
 export class CwkDashboard extends LitElement {
   static get styles() {

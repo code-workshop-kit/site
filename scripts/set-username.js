@@ -1,7 +1,6 @@
 import { html, LitElement } from '@lion/core';
 
 import './loadDankMonoFont.js';
-import '../components/cwk-nav.js';
 import '../components/cwk-form/cwk-set-username-form.js';
 import '../components/cwk-input-user/cwk-input-user.js';
 
