@@ -1,6 +1,9 @@
 import { html, LitElement } from '@lion/core';
 import { checkAuth } from './checkAuth.js';
 import './loadDankMonoFont.js';
+import '../components/cwk-nav.js';
+import '../components/cwk-drawer/cwk-drawer.js';
+import '../components/cwk-sidebar.js';
 import '../components/cwk-svg.js';
 import '../components/cwk-form/cwk-auth-form.js';
 import '../components/cwk-input-user/cwk-input-user.js';
