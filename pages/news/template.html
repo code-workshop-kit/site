@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Code-workshop-kit, the future of remote coding workshops and training."
+    />
+    <title>code-workshop-kit</title>
+    <link rel="stylesheet" href="../../../styles/global.css" />
+    <link rel="stylesheet" href="../../../styles/articles.css" />
+    <link rel="stylesheet" href="../../../node_modules/highlight.js/styles/hybrid.css" />
+    <script type="module" src="../../../scripts/articles.js"></script>
+  </head>
+  <body>
+    <cwk-nav></cwk-nav>
+    <cwk-drawer id="sidebar">
+      <cwk-sidebar slot="content" id="sidebar-nav"></cwk-sidebar>
+    </cwk-drawer>
+    <main>
+      <div class="caption">
+        <img src="../../../assets/images/{{ id }}/img.png" />
+      </div>
+      <article>{{ content }}</article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+html[theme='light'] {
+  --card-background-color: var(--cwk-light);
+}
+
+html[theme='dark'] {
+  --card-background-color: var(--cwk-darker);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --card-background-color: var(--cwk-darker);
+  }
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+.articles {
+  display: grid;
+  grid-gap: 60px;
+  grid-template-columns: repeat(auto-fill, 400px);
+  justify-content: center;
+}
+
+article {
+  width: 400px;
+  height: 350px;
+  border-radius: 10px;
+  background-color: var(--card-background-color);
+  overflow: hidden;
+  box-shadow: 0px 5px 25px var(--cwk-darker);
+}
+
+.caption {
+  display: block;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.caption img {
+  width: 100%;
+}
+
+.content a {
+  text-decoration: none;
+  color: var(--cwk-primary-blue);
+}
+
+.timestamp {
+  font-size: 14px;
+  text-align: right;
+  padding-right: 15px;
+}

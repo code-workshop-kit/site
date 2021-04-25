@@ -1,4 +1,5 @@
 import { createRequire } from 'module';
+import relativeLinks from './rollupPluginRelativeLinks.js';
 import initialThemeScript from '../scripts/initial-theme-script.js';
 
 const require = createRequire(import.meta.url);
@@ -11,10 +12,10 @@ const { terser } = require('rollup-plugin-terser');
 const csso = require('csso');
 
 export default {
-  input: './pages/*.html',
   output: { dir: 'dist' },
   plugins: [
     html({
+      input: ['./pages/*.html', './pages/news/*/*.html'],
       transformAsset: [
         (content, filePath) => {
           if (filePath.endsWith('.css')) {
@@ -47,5 +48,8 @@ export default {
     }),
     dynamicImportVars({}),
     terser(),
+    relativeLinks({
+      news: '/news',
+    }),
   ],
 };
