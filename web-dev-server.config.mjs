@@ -1,5 +1,5 @@
 import { createRequire } from 'module';
-import relativeLinks from './rollup/rollupPluginRelativeLinks.js';
+import relativeLinks, { transformCode } from './rollup/rollupPluginRelativeLinks.js';
 import initialThemeScript from './scripts/initial-theme-script.js';
 
 const require = createRequire(import.meta.url);
@@ -8,6 +8,12 @@ const replace = require('@rollup/plugin-replace');
 
 const wdsReplace = fromRollup(replace);
 const wdsRelativeLinks = fromRollup(relativeLinks);
+
+const relativeLinksMap = {
+  // eslint-disable-next-line no-template-curly-in-string
+  news: "${new URL('../pages/news', import.meta.url)}",
+  'cwk-v2': './news/cwk-v2/cwk-v2.html',
+};
 
 export default {
   open: true,
@@ -37,10 +43,17 @@ export default {
         return transformedBody;
       },
     },
-    wdsRelativeLinks({
-      // eslint-disable-next-line no-template-curly-in-string
-      news: "${new URL('../pages/news', import.meta.url)}",
-    }),
+    {
+      name: 'relative-links-in-js',
+      transform(context) {
+        let transformedBody = context.body;
+        if (context.response.is('html')) {
+          transformedBody = transformCode(transformedBody, relativeLinksMap);
+        }
+        return transformedBody;
+      },
+    },
+    wdsRelativeLinks(relativeLinksMap),
   ],
   middleware: [
     function rewriteIndex(context, next) {
@@ -58,8 +71,7 @@ export default {
       if (
         context.status === 404 &&
         context.url.endsWith('.html') &&
-        !context.url.startsWith('/pages/') &&
-        !context.url.startsWith('/news/')
+        !context.url.startsWith('/pages/')
       ) {
         context.redirect(`/pages${context.url}`);
       }

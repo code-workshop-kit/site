@@ -63,7 +63,7 @@ You can of course also reach me on the [code-workshop-kit slack](https://join.sl
 
 In the previous section I explained how the scaffolder allows you to start a workshop super quick.
 
-In addition, there is now an [official code-workshop-kit VS Code extension]() that automates some tedious tasks for you:
+In addition, there is now an [official code-workshop-kit VS Code extension](https://marketplace.visualstudio.com/items?itemName=code-workshop-kit.code-workshop-kit-extension) that automates some tedious tasks for you:
 
 - Automatically adding Live Share participants to the `cwk.config.js` participants array when they join.
 - Automatically scaffold files for each participant when they join, based on your template.

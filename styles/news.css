@@ -12,6 +12,13 @@ html[theme='dark'] {
   }
 }
 
+main {
+  padding: 0 50px;
+  margin: 100px auto;
+  max-width: var(--cwk-content-width);
+  text-align: center;
+}
+
 h1 {
   margin-bottom: 50px;
 }
@@ -19,13 +26,14 @@ h1 {
 .articles {
   display: grid;
   grid-gap: 60px;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 400px));
   justify-content: center;
 }
 
 article {
-  width: 400px;
-  height: 350px;
+  position: relative;
+  max-width: 400px;
+  max-height: 350px;
   border-radius: 10px;
   background-color: var(--card-background-color);
   overflow: hidden;
@@ -34,7 +42,7 @@ article {
 
 .caption {
   display: block;
-  height: 200px;
+  height: 150px;
   width: 100%;
   overflow: hidden;
 }
@@ -43,13 +51,27 @@ article {
   width: 100%;
 }
 
+.content {
+  padding: 15px;
+}
+
 .content a {
   text-decoration: none;
   color: var(--cwk-primary-blue);
 }
 
+.content p {
+  margin-bottom: 3em;
+}
+
+.content h2 {
+  margin-top: 0;
+}
+
 .timestamp {
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
   font-size: 14px;
-  text-align: right;
-  padding-right: 15px;
+  right: 0;
 }
