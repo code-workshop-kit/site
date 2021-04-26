@@ -1,4 +1,5 @@
 import { createRequire } from 'module';
+import relativeLinks, { transformCode } from './rollupPluginRelativeLinks.js';
 import initialThemeScript from '../scripts/initial-theme-script.js';
 
 const require = createRequire(import.meta.url);
@@ -10,11 +11,16 @@ const { importMetaAssets } = require('@web/rollup-plugin-import-meta-assets');
 const { terser } = require('rollup-plugin-terser');
 const csso = require('csso');
 
+const relativeLinksMap = {
+  news: '/news',
+  'cwk-v2': '/cwk-v2.html',
+};
+
 export default {
-  input: './pages/*.html',
   output: { dir: 'dist' },
   plugins: [
     html({
+      input: ['./pages/*.html', './pages/news/*/*.html'],
       transformAsset: [
         (content, filePath) => {
           if (filePath.endsWith('.css')) {
@@ -33,6 +39,7 @@ export default {
               </head>
             `,
           ),
+        (_html) => transformCode(_html, relativeLinksMap),
       ],
     }),
     nodeResolve(),
@@ -47,5 +54,8 @@ export default {
     }),
     dynamicImportVars({}),
     terser(),
+    relativeLinks({
+      news: '/news',
+    }),
   ],
 };

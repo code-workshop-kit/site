@@ -76,7 +76,11 @@ class CwkNav extends HTMLElement {
           color: var(--nav-text-color);
         }
 
-        .wide-menu > div:not(:first-child) {
+        .pages {
+          padding: 0 40px;
+        }
+
+        .pages a:not(:first-child) {
           padding-left: 40px;
         }
 
@@ -120,15 +124,20 @@ class CwkNav extends HTMLElement {
       </style>
       <nav class="items">
         <cwk-svg svg-id="hamburger" class="hamburger"></cwk-svg>
-        <div class="logo"><a href="./">cwk</a></div>
+        <div class="logo"><a href="/">cwk</a></div>
         <div class="wide-menu">
           <cwk-theme-switcher></cwk-theme-switcher>
-          <div>
+          <div class="pages">
             <a
               target="_blank"
               rel="noopener"
               href="https://github.com/code-workshop-kit/code-workshop-kit#code-workshop-kit"
               >DOCS</a
+            >
+            <a
+              id="newsAnchor"
+              href="__ROLLUP_PLUGIN_RELATIVE_LINKS__news"
+              >NEWS</a
             >
           </div>
           <div class="socials">
