@@ -16,13 +16,13 @@ Summarizing:
 
 The entire codebase has been migrated to TypeScript. Prior to this, code-workshop-kit was not strictly typed at all.
 
-Personally I was more familiar with types from JSDocs, but this time around I decided to try out the full TypeScript workflow.
+Personally, I was more familiar with types from JSDocs, but this time around I decided to try out the full TypeScript workflow.
 
-I am still pretty neutral on which one I prefer, but here's what it means for you as a code-workshop-kit user:
+I am still pretty neutral on which one I prefer but here's what it means for you as a code-workshop-kit user:
 
 - A couple of bugs related to non-strict types were squashed! Very uncommon bugs though, so it's unlikely that you will notice this.
 - You can now import things from code-workshop-kit with types attached to them, handy if you want to use CWK by extending parts of it in your NodeJS projects.
-- Potentially breaks your code if you were importing from code-workshop-kit NPM package, hence v2
+- Potentially breaks your code if you were importing from code-workshop-kit NPM package, hence v2.
 
 What this migration also allowed was to create our VS Code extension in TypeScript and allow reusing and importing from CWK with strict types, this was the main trigger for doing this migration.
 
@@ -34,13 +34,13 @@ code-workshop-kit now has a generator or scaffolder as some people like to call 
 npm init code-workshop-kit
 ```
 
-Is all you have to do now as a host to create a new workshop using code-workshop-kit.
+This is all you have to do now as a host to create a new workshop using code-workshop-kit.
 
 You will be presented with the following menu:
 
 ![scaffolder menu image](../../../assets/images/cwk-v2/generator.png)
 
-As you can see, I already created a bunch of templates for workshops that I tend to give.
+As you can see, I already created a bunch of templates for workshops that I tend to give myself.
 
 ```js
 class JorenComponent extends HTMLElement {
@@ -73,7 +73,7 @@ Shoutout to [Jonathan Carter](https://twitter.com/LostInTangent) at Microsoft Li
 
 ![code-workshop-kit vscode extension image](../../../assets/images/cwk-v2/vscode.png)
 
-> Keep in mind however that this extension hasn't yet been battle-tested much by me personally, and is currently in alpha, so expect some bugs and breaking changes
+> Keep in mind however that this extension hasn't yet been battle-tested much by me personally, and is currently in alpha, so expect some bugs and breaking changes.
 
 ### Slack
 
