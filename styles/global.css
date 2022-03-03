@@ -97,7 +97,6 @@ body {
   font-weight: lighter;
   font-size: 16px;
   transition: var(--cwk-background-transition);
-  will-change: color, fill, background;
 }
 
 polygon,
